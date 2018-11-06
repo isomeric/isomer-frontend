@@ -70,6 +70,8 @@ class SocketService {
         this.stats = {
             rx: 0,
             tx: 0,
+            rx_bytes: 0,
+            tx_bytes: 0,
             start: 0,
             latency: 0
         };
@@ -250,6 +252,7 @@ class SocketService {
 
             console.debug('[SOCKET] Parsed message: ', msg, self.handlers);
 
+            self.stats.rx_bytes = self.stats.rx_bytes + packedmsg.data.length;
             self.stats.rx++;
 
             if ('component' in msg) {
@@ -372,6 +375,7 @@ class SocketService {
         try {
             this.sock.send(json);
             this.stats.tx++;
+            this.stats.tx_bytes = this.stats.tx_bytes + json.length;
 
             $('#ledoutgoing').css({'color': 'red'});
 

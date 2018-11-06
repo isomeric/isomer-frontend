@@ -230,7 +230,7 @@
 
     <footer class="navbar-fixed-bottom"
             ng-class="{'navbar-inverse': $ctrl.statusbar_visible}"
-            ng-style="{'max-height': showStatusHistory ? '50vh' : '1.5em'}">
+            ng-style="{'max-height': $ctrl.statusbar_history_visible ? '50vh' : '1.5em'}">
         <div class="row">
             <div id="statusLeft" class="col-xs-2">
                 <span>
@@ -241,21 +241,30 @@
                     </a>
                 </span>
                 <span>
-                    <span id="ledincoming" class="fa fa-arrow-circle-down" title="Incoming data"></span>
-                    <span id="ledoutgoing" class="fa fa-arrow-circle-up" title="Outgoing data"></span>
+                    <span id="ledincoming" class="fa fa-arrow-circle-down"
+                          title="Incoming data ({{$ctrl.socket.stats.rx}} Packets / {{$ctrl.socket.stats.rx_bytes}} bytes)"></span>
+                    <span id="ledoutgoing" class="fa fa-arrow-circle-up"
+                          title="Outgoing data ({{$ctrl.socket.stats.tx}} Packets / {{$ctrl.socket.stats.tx_bytes}} bytes)"></span>
+                </span>
+                <span id="debugmode" class="fa fa-wrench" title="Debug mode"
+                      ng-if="$ctrl.user.debug">
+                </span>
+                <span id="alert" class="fa fa-warning blink" title="Warning: {{$ctrl.statusbar.last_message.title}}"
+                      ng-if="$ctrl.statusbar.alerting === true"
+                      ng-click="$ctrl.statusbar.alerting = false">
                 </span>
             </div>
             <div id="statusCenter" ng-show="$ctrl.statusbar_visible" class="col-xs-8">
                 <a class="fa" title="{{'Toggle notification history'|translate}}"
-                   ng-class="{'fa-chevron-up': !showStatusHistory,
-                              'fa-chevron-down': showStatusHistory}"
-                   ng-click="showStatusHistory = !showStatusHistory"></a>
+                   ng-class="{'fa-chevron-up': !$ctrl.statusbar_history_visible,
+                              'fa-chevron-down': $ctrl.statusbar_history_visible}"
+                   ng-click="$ctrl.statusbar_history_visible = !$ctrl.statusbar_history_visible"></a>
                 <a class="fa" title="{{'Toggle timestamps'|translate}}"
                    ng-click="showStatusTimestamps = !showStatusTimestamps"
                    ng-class="{'fa-circle-o': !showStatusTimestamps,
                                   'fa-clock-o': showStatusTimestamps}">
                 </a>
-                <ul ng-show="showStatusHistory" scroll-glue>
+                <ul ng-show="$ctrl.statusbar_history_visible" scroll-glue>
                     <li ng-repeat="msg in $ctrl.statusbar.messages">
                         <span class="text-{{msg.type}}">
                             <span ng-show="showStatusTimestamps">{{msg.time}}</span>
@@ -264,7 +273,7 @@
                         </span>
                     </li>
                 </ul>
-                <span id="statusbar_history" ng-show="!showStatusHistory">
+                <span id="statusbar_history" ng-show="!$ctrl.statusbar_history_visible">
                     <span class="text-{{$ctrl.statusbar.last_message.type}}">
                         <span ng-show="showStatusTimestamps">{{$ctrl.statusbar.last_message.time}}</span>
                         <b>{{$ctrl.statusbar.last_message.title|translate}}:</b>

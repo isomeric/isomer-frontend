@@ -109,6 +109,14 @@ footer ul {
     cursor: default;
 }
 
+#debugmode {
+    color: yellow;
+}
+
+#alert {
+    color: red;
+}
+
 .select.dropdown-menu {
     max-height: 90vh;
     overflow-y: auto;

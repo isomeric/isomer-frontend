@@ -30,7 +30,10 @@ class StatusbarService {
         this.last_message = "";
         this.status = gettextCatalog.getString("Ready.");
 
+        this.alerting = false;
+
         let self = this;
+
     }
 
     add(type, title, text) {
@@ -40,6 +43,11 @@ class StatusbarService {
             tmp.innerHTML = html;
             return tmp.textContent || tmp.innerText || "";
         }
+
+        if (type === 'warning' || type === 'danger') {
+            this.alerting = true;
+        }
+
         let msg = {
             'time': new Date().toISOString(),
             'type': type,

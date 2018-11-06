@@ -48,6 +48,7 @@ class AppComponent {
         this.clientconfiglist = [];
         this.clutter_visible = false;
         this.statusbar_visible = false;
+        this.statusbar_history_visible = false;
         this.language_selector_open = false;
 
         console.log('[APP] Backgrounds:', backgrounds);
@@ -58,6 +59,10 @@ class AppComponent {
             description: 'Toggle statusbar details',
             callback: function () {
                 self.statusbar_visible = !self.statusbar_visible;
+                if (self.statusbar_visible === true) {
+                    self.statusbar_history_visible = true;
+                    self.statusbar.alerting = false;
+                }
             }
         });
         hotkeys.add({
@@ -98,6 +103,15 @@ class AppComponent {
             description: 'Open & focus language selector',
             callback: function() {
                 self.language_selector_open = !self.language_selector_open;
+            }
+        });
+        hotkeys.add({
+            // TODO: Switch focus to language selector on hotkey
+            //  otherwise this one is not really helpful...
+            combo: 'ctrl+alt+d',
+            description: 'Toggle debug mode',
+            callback: function() {
+                self.user.debug = !self.user.debug;
             }
         });
 
