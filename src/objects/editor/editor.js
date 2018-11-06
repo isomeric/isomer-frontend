@@ -275,6 +275,9 @@ class objecteditor {
         this.schemascreenname = this.config.schema.charAt(0).toUpperCase() + this.config.schema.slice(1);
         if (this.config.uuid === "" || typeof this.config.uuid === 'undefined') {
             this.config.action = 'Create';
+            if (typeof this.model === 'undefined' || this.model === null) {
+                this.model = {};
+            }
             $('#objModified').removeClass('hidden');
         } else if (this.config.action === 'view') {
             console.log('[OE] Read only!');
@@ -329,12 +332,17 @@ class objecteditor {
         console.log('[OE] Object update initiated with ', model);
 
         this.objectproxy.put(this.config.schema, model).then(function (msg) {
+            console.debug('[OE] Put response:', msg);
             if (msg.action === 'put') {
                 if (msg.data.uuid === self.config.uuid) {
+                    console.debug('[OE] Known object stored');
                     self.markStored();
-                } else if (self.config.uuid === "") {
+                } else if (typeof self.config.uuid === "undefined" || self.config.uuid === "") {
+                    console.debug('[OE] New object stored');
                     self.config.uuid = msg.data.uuid;
                     self.markStored();
+                } else {
+                    console.log('[OE] I do not know what happened:', msg, self.config);
                 }
             } else {
                 self.notification.add('warning', 'Not stored', msg.reason, 5);
