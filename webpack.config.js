@@ -24,6 +24,9 @@ let PARAMS_DEFAULT = {
             'angular-schema-form': __dirname + '/node_modules/angular-schema-form/dist/schema-form.js',
             //'spectrum': '../node_modules/spectrum-colorpicker'
             //'angular-schema-form-bootstrap': '../node_modules/angular-schema-form-bootstrap/bootstrap-decorator.js'
+            'phaser': __dirname + '/node_modules/phaser-ce/build/custom/phaser-split.js',
+            'pixi': __dirname + '/node_modules/phaser-ce/build/custom/pixi.js',
+            'p2': __dirname + '/node_modules/phaser-ce/build/custom/p2.js'
         }
     },
     target: 'web',
@@ -47,7 +50,7 @@ let PARAMS_DEFAULT = {
             'angular-strap/dist/angular-strap.js',
             'angular-strap/dist/angular-strap.tpl.js',
 
-            'humanize-duration',
+            'humanize-duration'
         ]
     },
     output: {
@@ -76,11 +79,11 @@ let PARAMS_DEFAULT = {
             $: 'jquery',
             jQuery: 'jquery',
             c3: 'c3',
-            qrcode: 'qrcode-generator',
+            qrcode: 'qrcode-generator'
         }),
         new webpack.DefinePlugin({
-            __COMMIT_HASH__: JSON.stringify(commitHash),
-        }),
+            __COMMIT_HASH__: JSON.stringify(commitHash)
+        })
         // TODO: Make this an argument or so:
         //new BundleAnalyzerPlugin(),
     ],
@@ -89,7 +92,7 @@ let PARAMS_DEFAULT = {
         host: '0.0.0.0',
         compress: true,
         hot: true
-    },
+    }
 };
 let PARAMS_PER_TARGET = {
     DEV: {
@@ -121,7 +124,7 @@ let PARAMS_PER_TARGET = {
     },
     DIST: {
         output: {
-            path: __dirname + '/dist',
+            path: __dirname + '/dist'
         },
         plugins: [
             new CleanWebpackPlugin(['dist']),
@@ -132,8 +135,8 @@ let PARAMS_PER_TARGET = {
                 algorithm: 'gzip',
                 test: /\.(js|css|ttf|svg|eot)$/,
                 threshold: 10240,
-                minRatio: 0.8,
-            }),
+                minRatio: 0.8
+            })
         ]
     }
 };
@@ -163,13 +166,13 @@ module.exports = {
                     {
                         loader: 'image-webpack-loader',
                         options: {
-                            bypassOnDebug: true, // webpack@1.x
+                            bypassOnDebug: true // webpack@1.x
                             //disable: true, // webpack@2.x and newer
-                        },
+                        }
                     }
                 ]
             },
-            {test: /[\/]angular\.js$/, loader: "exports-loader?angular"},
+            //{test: /[\/]angular\.js$/, loader: "exports-loader?angular"},
             {test: /\.scss/, loaders: ['style-loader', 'css-loader', 'sass-loader']},
             {
                 test: require.resolve('tinymce/tinymce'),
@@ -189,7 +192,7 @@ module.exports = {
     },
     plugins: params.plugins,
     devServer: params.devServer,
-    devtool: params.devtool,
+    devtool: params.devtool
 };
 
 function _printBuildInfo(params) {
