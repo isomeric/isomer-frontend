@@ -1,5 +1,5 @@
 /*
- * Hackerfleet Operating System
+ * Isomer Application Framework
  * ============================
  * Copyright (C) 2011 - 2018 riot <riot@c-base.org> and others.
  *
@@ -49,7 +49,7 @@ class SystemlogComponent {
         }
 
 
-        socket.listen('hfos.ui.syslog', function (msg) {
+        socket.listen('isomer.ui.syslog', function (msg) {
             if (msg.action === 'history') {
                 console.log('[SYSLOG] Got a history update', msg.data);
                 let known_emitters = [];
@@ -82,7 +82,7 @@ class SystemlogComponent {
 
         this.subscribe = function() {
             let packet = {
-                component: 'hfos.ui.syslog',
+                component: 'isomer.ui.syslog',
                 action: 'subscribe'
             };
             self.socket.send(packet);
@@ -99,7 +99,7 @@ class SystemlogComponent {
 
             console.log('[SYSLOG] Earliest timestamp is:', timestamp);
             let packet = {
-                component: 'hfos.ui.syslog',
+                component: 'isomer.ui.syslog',
                 action: 'history',
                 data: {
                     end: timestamp,

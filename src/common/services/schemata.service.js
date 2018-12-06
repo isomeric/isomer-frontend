@@ -1,5 +1,5 @@
 /*
- * Hackerfleet Operating System
+ * Isomer Application Framework
  * ============================
  * Copyright (C) 2011 - 2018 riot <riot@c-base.org> and others.
  *
@@ -21,10 +21,10 @@
 
 /**
  * @ngdoc service
- * @name hfosFrontendApp.schemata
+ * @name isomerFrontendApp.schemata
  * @description
  * # schemata
- * Service in the hfosFrontendApp.
+ * Service in the isomerFrontendApp.
  */
 
 class SchemataService {
@@ -42,7 +42,7 @@ class SchemataService {
         function updateschemata() {
             console.log('[SCHEMATA] Getting update of schemata.');
             let request = {
-                component: 'hfos.events.schemamanager',
+                component: 'isomer.events.schemamanager',
                 action: 'all'
             };
             self.socket.send(request);
@@ -65,7 +65,7 @@ class SchemataService {
 
         }
 
-        this.socket.listen('hfos.events.schemamanager', registerschemata);
+        this.socket.listen('isomer.events.schemamanager', registerschemata);
         this.rootscope.$on('User.Login', updateschemata);
 
         /*if (this.user.signedin === true) {
@@ -76,7 +76,7 @@ class SchemataService {
 
     updateconfigschemata() {
         console.log('[SCHEMATA] Getting update of schemata.');
-        this.socket.send({component: 'hfos.events.schemamanager', action: 'configuration'});
+        this.socket.send({component: 'isomer.events.schemamanager', action: 'configuration'});
     }
 
     get(schemaname) {

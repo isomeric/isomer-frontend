@@ -1,5 +1,5 @@
 /*
- * Hackerfleet Operating System
+ * Isomer Application Framework
  * ============================
  * Copyright (C) 2011 - 2018 riot <riot@c-base.org> and others.
  *
@@ -102,7 +102,7 @@ require('humanize-duration');
 
 import ngQrcode from 'angular-qrcode';
 
-// HFOS Core (Sails) Modules
+// Isomer Core (Sails) Modules
 import app from './app/app.module';
 import common from './common/common.module';
 import featuremenu from './featuremenu/featuremenu.module';
@@ -111,7 +111,7 @@ import about from './about/about.module';
 import systemlog from './systemlog/systemlog.module';
 import doc from './doc/doc.module';
 
-// HFOS Plugin Modules
+// Isomer Plugin Modules
 
 let modules = ['mgcrea.ngStrap', 'gridster', 'ngDraggable', 'FBAngular', 'ui.bootstrap-slider', 'angularSpectrumColorpicker',
     'angularSpinner', 'angular-uuid', 'luegg.directives', 'angularMoment', 'ngTable', 'ngEmbed', 'gettext', 'matchMedia',
@@ -127,7 +127,7 @@ let modules = ['mgcrea.ngStrap', 'gridster', 'ngDraggable', 'FBAngular', 'ui.boo
 
 angular.module('main', modules)
     .config(function (localStorageServiceProvider) {
-        localStorageServiceProvider.setPrefix('HFOS');
+        localStorageServiceProvider.setPrefix('ISOMER');
         // localStorageServiceProvider.setStorageCookieDomain('example.com');
         // localStorageServiceProvider.setStorageType('sessionStorage');
     })

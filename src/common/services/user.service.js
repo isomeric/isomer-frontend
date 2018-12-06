@@ -1,5 +1,5 @@
 /*
- * Hackerfleet Operating System
+ * Isomer Application Framework
  * ============================
  * Copyright (C) 2011 - 2018 riot <riot@c-base.org> and others.
  *
@@ -154,7 +154,7 @@ class UserService {
 
         function requestLanguages() {
             let request = {
-                component: 'hfos.ui.clientmanager',
+                component: 'isomer.ui.clientmanager',
                 action: 'getlanguages'
             };
 
@@ -295,7 +295,7 @@ class UserService {
             }
         });
 
-        this.socket.listen('hfos.ui.clientmanager', handleLanguages);
+        this.socket.listen('isomer.ui.clientmanager', handleLanguages);
         this.socket.listen('auth', loginaction);
         this.socket.listen('profile', storeprofile);
         this.socket.listen('clientconfig', store_client_configuration);
@@ -522,11 +522,11 @@ class UserService {
     storeCookie(newuuid, autologin) {
         console.log('[USER] Storing configuration UUID cookie:', newuuid, autologin);
         this.clientuuid = newuuid;
-        this.cookies.putObject('hfosclient', {uuid: newuuid, autologin: autologin});
+        this.cookies.putObject('isomer-client', {uuid: newuuid, autologin: autologin});
     }
 
     getCookie() {
-        let cookie = this.cookies.get('hfosclient');
+        let cookie = this.cookies.get('isomer-client');
 
         if (typeof cookie === 'undefined') {
             cookie = "";
@@ -559,7 +559,7 @@ class UserService {
         self.gettextCatalog.loadRemote("/l10n/frontend." + token + ".json");
 
         let request = {
-            component: 'hfos.ui.clientmanager',
+            component: 'isomer.ui.clientmanager',
             action: 'selectlanguage',
             data: token
         };
@@ -576,7 +576,7 @@ class UserService {
     saveProfile() {
         console.log('[USER] Storing user profile on node');
         this.socket.send({
-            'component': 'hfos.events.objectmanager',
+            'component': 'isomer.events.objectmanager',
             'action': 'put',
             'data': {'schema': 'profile', 'obj': this.profile}
         });
@@ -585,7 +585,7 @@ class UserService {
     saveClientconfig() {
         console.log('[USER] Storing client config on node');
         this.socket.send({
-            'component': 'hfos.events.objectmanager',
+            'component': 'isomer.events.objectmanager',
             'action': 'put',
             'data': {'schema': 'client', 'obj': this.clientconfig}
         });
@@ -595,7 +595,7 @@ class UserService {
         console.log('[USER] Loading client config from node');
         this.clientuuid = uuid;
         this.socket.send({
-            'component': 'hfos.events.objectmanager',
+            'component': 'isomer.events.objectmanager',
             'action': 'get',
             'data': {'schema': 'client', 'uuid': this.clientuuid}
         });

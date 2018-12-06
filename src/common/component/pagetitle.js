@@ -1,5 +1,5 @@
 /*
- * Hackerfleet Operating System
+ * Isomer Application Framework
  * ============================
  * Copyright (C) 2011 - 2018 riot <riot@c-base.org> and others.
  *
@@ -23,8 +23,8 @@ let pagetitle = function ($rootScope, $timeout, systemconfig) {
 
             let listener = function (event, toState) {
 
-                let title = 'HFOS';
-                if (toState.label) title = toState.label + '@' + systemconfig.nodename + ' - HFOS';
+                let title = 'Isomer';
+                if (toState.label) title = toState.label + '@' + systemconfig.nodename + ' - Isomer';
 
                 $timeout(function () {
                     element.text(title);

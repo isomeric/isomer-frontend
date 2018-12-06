@@ -1,5 +1,5 @@
 /*
- * Hackerfleet Operating System
+ * Isomer Application Framework
  * ============================
  * Copyright (C) 2011 - 2018 riot <riot@c-base.org> and others.
  *
@@ -73,7 +73,7 @@ class AboutComponent {
 
     command(cmd) {
         this.socket.send({
-            'component': 'hfos.events.system',
+            'component': 'isomer.events.system',
             'action': 'debugrequest',
             'data': cmd
         });

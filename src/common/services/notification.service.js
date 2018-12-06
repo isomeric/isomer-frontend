@@ -1,5 +1,5 @@
 /*
- * Hackerfleet Operating System
+ * Isomer Application Framework
  * ============================
  * Copyright (C) 2011 - 2018 riot <riot@c-base.org> and others.
  *
@@ -60,7 +60,7 @@ class NotificationService {
             }
         }
 
-        this.socket.listen('hfos.alert.manager', remoteAlert);
+        this.socket.listen('isomer.alert.manager', remoteAlert);
         console.log('[NOTIFY] NotificationService constructed');
 
     }

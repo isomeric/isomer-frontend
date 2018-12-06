@@ -1,20 +1,20 @@
-.. image:: https://travis-ci.org/Hackerfleet/hfos-frontend.svg?branch=master
-    :target: https://travis-ci.org/Hackerfleet/hfos-frontend
-.. image:: https://codeclimate.com/github/Hackerfleet/hfos-frontend/badges/gpa.svg
-   :target: https://codeclimate.com/github/Hackerfleet/hfos-frontend
+.. image:: https://travis-ci.org/isomeric/isomer-frontend.svg?branch=master
+    :target: https://travis-ci.org/isomeric/isomer-frontend
+.. image:: https://codeclimate.com/github/isomeric/isomer-frontend/badges/gpa.svg
+   :target: https://codeclimate.com/github/isomeric/isomer-frontend
    :alt: Code Climate
-.. image:: https://codeclimate.com/github/Hackerfleet/hfos-frontend/badges/coverage.svg
-   :target: https://codeclimate.com/github/Hackerfleet/hfos-frontend/coverage
+.. image:: https://codeclimate.com/github/isomeric/isomer-frontend/badges/coverage.svg
+   :target: https://codeclimate.com/github/isomeric/isomer-frontend/coverage
    :alt: Test Coverage
-.. image:: https://codeclimate.com/github/Hackerfleet/hfos-frontend/badges/issue_count.svg
-   :target: https://codeclimate.com/github/Hackerfleet/hfos-frontend
+.. image:: https://codeclimate.com/github/isomeric/isomer-frontend/badges/issue_count.svg
+   :target: https://codeclimate.com/github/isomeric/isomer-frontend
    :alt: Issue Count
-.. image:: https://badges.greenkeeper.io/Hackerfleet/hfos-frontend.svg
+.. image:: https://badges.greenkeeper.io/isomeric/isomer-frontend.svg
    :alt: Greenkeeper badge
    :target: https://greenkeeper.io/
 
-HFOS - The Hackerfleet Operating System
-=======================================
+Isomer Application Framework Frontend
+=====================================
 
     A modern, opensource approach to maritime navigation.
 
@@ -28,8 +28,8 @@ HFOS - The Hackerfleet Operating System
 Frontend
 ========
 
-This is the frontend submodule. Please check <https://github.com/hackerfleet/hfos>
-for more information about HFOS.
+This is the frontend submodule. Please check <https://github.com/isomeric/isomer>
+for more information about Isomer.
 
 
 License
@@ -54,7 +54,7 @@ Bugs & Discussion
 =================
 
 Please research any bugs you find via our `Github issue tracker for
-HFOS <https://github.com/hackerfleet/hfos/issues>`__ and report them,
+Isomer <https://github.com/isomeric/isomer/issues>`__ and report them,
 if they're still unknown.
 
 If you want to discuss (opensource) maritime technology in general
@@ -75,7 +75,7 @@ manage tool to build and install the frontend:
     $ cd ..
     $ python hfos_manage -install-frontend
 
-Be aware, that all HFOS modules you intend to use and develop on should
+Be aware, that all Isomer modules you intend to use and develop on should
 be installed before building the frontend.
 You can reinstall the frontend after changing what modules you're using.
 

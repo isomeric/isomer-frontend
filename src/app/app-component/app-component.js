@@ -1,5 +1,5 @@
 /*
- * Hackerfleet Operating System
+ * Isomer Application Framework
  * ============================
  * Copyright (C) 2011 - 2018 riot <riot@c-base.org> and others.
  *
@@ -123,7 +123,7 @@ class AppComponent {
 
         let self = this;
 
-        this.socket.listen('hfos.ui.tagmanager', function(msg)  {
+        this.socket.listen('isomer.ui.tagmanager', function(msg)  {
             console.log('[APP] Tag manager result:', msg);
         });
 
@@ -251,7 +251,7 @@ class AppComponent {
         if (this.search_string !== '') {
             console.log('Would search now');
             let request = {
-                component: 'hfos.ui.tagmanager',
+                component: 'isomer.ui.tagmanager',
                 action: 'get_tagged',
                 data: this.search_string
             };

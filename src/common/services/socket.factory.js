@@ -1,5 +1,5 @@
 /*
- * Hackerfleet Operating System
+ * Isomer Application Framework
  * ============================
  * Copyright (C) 2011 - 2018 riot <riot@c-base.org> and others.
  *
@@ -47,7 +47,7 @@ class SocketService {
         if ($location.protocol() !== 'https') {
             this.protocol = 'ws';
             console.warn('[SOCKET] Running on insecure protocol!');
-            $('#hfos-icon').addClass('icon-glow-red');
+            $('#isomer-icon').addClass('icon-glow-red');
         }
 
         this.websocketurl = this.protocol + '://' + this.host;
@@ -85,7 +85,7 @@ class SocketService {
 
         let self = this;
 
-        let cookie = this.cookies.get('hfosclient-dev');
+        let cookie = this.cookies.get('isomer-client-dev');
         if (typeof cookie !== 'undefined') {
             let json = JSON.parse(cookie);
             if (typeof json.port !== 'undefined') {
@@ -93,9 +93,9 @@ class SocketService {
                 self.port = +json.port;
                 self.protocol = json.secure ? 'wss' : 'ws';
                 if (json.secure) {
-                    $('#hfos-icon').removeClass('icon-glow-red');
+                    $('#isomer-icon').removeClass('icon-glow-red');
                 }
-                $('#hfos-icon').addClass('icon-glow-blue');
+                $('#isomer-icon').addClass('icon-glow-blue');
             }
         }
 
@@ -104,18 +104,18 @@ class SocketService {
             if (typeof secure === 'undefined') secure = self.secure;
 
             console.log('[SOCKET] Storing development port cookie:', port, secure);
-            self.cookies.put('hfosclient-dev', JSON.stringify({port: port, secure: secure}));
+            self.cookies.put('isomer-client-dev', JSON.stringify({port: port, secure: secure}));
             self.port = port;
             self.protocol = secure ? 'wss' : 'ws';
             self.reconnect();
-            $('#hfos-icon').addClass('icon-glow-blue');
+            $('#isomer-icon').addClass('icon-glow-blue');
         }
 
         function unsetPort() {
             console.log('[SOCKET] Unsetting development port cookie');
             // TODO: If we decide to store more in that, we should only delete the port keyword
-            self.cookies.remove('hfosclient-dev');
-            $('#hfos-icon').removeClass('icon-glow-blue');
+            self.cookies.remove('isomer-client-dev');
+            $('#isomer-icon').removeClass('icon-glow-blue');
             self.port = $location.port();
             self.secure = $location.protocol === 'https';
             self.reconnect();
@@ -311,7 +311,7 @@ class SocketService {
             if (self.connected) {
                 console.debug('[SOCKET] Transmitting ping');
                 let packet = {
-                    component: 'hfos.ui.clientmanager',
+                    component: 'isomer.ui.clientmanager',
                     action: 'ping',
                     data: new Date().getTime()
                 };
@@ -324,7 +324,7 @@ class SocketService {
         this.sock.onclose = CloseEvent;
         this.sock.onmessage = receive;
 
-        this.listen('hfos.ui.clientmanager', function (msg) {
+        this.listen('isomer.ui.clientmanager', function (msg) {
             if (msg.action === 'Flooding') {
                 console.warn('[SOCKET] Clientmanager wants us to stop flooding.');
             } else if (msg.action === 'pong') {

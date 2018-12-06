@@ -1,5 +1,5 @@
 /*
- * Hackerfleet Operating System
+ * Isomer Application Framework
  * ============================
  * Copyright (C) 2011 - 2018 riot <riot@c-base.org> and others.
  *
@@ -55,7 +55,7 @@ class configurator {
             console.log('[C] Destroying live edit watcher');
             self.loginupdate();
             self.schemaupdate();
-            self.socket.unlisten('hfos.ui.configurator', self.configuratorupdate);
+            self.socket.unlisten('isomer.ui.configurator', self.configuratorupdate);
             if (self.changewatcher !== null) self.changewatcher();
         });
 
@@ -63,7 +63,7 @@ class configurator {
             console.log('[C] Getting config ');
             self.schemata.updateconfigschemata();
             self.socket.send({
-                component: 'hfos.ui.configurator',
+                component: 'isomer.ui.configurator',
                 action: 'getlist'
             });
         }
@@ -118,7 +118,7 @@ class configurator {
             }
         };
 
-        this.socket.listen('hfos.ui.configurator', this.configuratorupdate);
+        this.socket.listen('isomer.ui.configurator', this.configuratorupdate);
 
             this.schemaupdate = this.rootscope.$on('Schemata.ConfigUpdate', function () {
             console.log('[C] Configuration Schema update.');
@@ -166,7 +166,7 @@ class configurator {
         if (this.changewatcher !== null) this.changewatcher();
 
         this.socket.send({
-            component: 'hfos.ui.configurator',
+            component: 'isomer.ui.configurator',
             data: {uuid: uuid},
             action: 'get'
         })
@@ -182,7 +182,7 @@ class configurator {
 
         console.log('[C] Component config update initiated with ', model);
         this.socket.send({
-            component: 'hfos.ui.configurator',
+            component: 'isomer.ui.configurator',
             action: 'put',
             data: this.model
         });

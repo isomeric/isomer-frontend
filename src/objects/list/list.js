@@ -1,5 +1,5 @@
 /*
- * Hackerfleet Operating System
+ * Isomer Application Framework
  * ============================
  * Copyright (C) 2011 - 2018 riot <riot@c-base.org> and others.
  *
@@ -74,7 +74,7 @@ class objectlist {
             }
         });
 
-        this.socket.listen('hfos.events.objectmanager', function(msg) {
+        this.socket.listen('isomer.events.objectmanager', function(msg) {
             if (msg.action === 'delete') {
                 delete self.objectlistdata[msg.data.uuid];
                 delete self.objectlisttoggles[msg.data.uuid];
@@ -115,7 +115,7 @@ class objectlist {
         let self = this;
 
         this.socket.send({
-            component: 'hfos.events.objectmanager',
+            component: 'isomer.events.objectmanager',
             action: 'remove_role',
             data: {
                 schema: self.schemaname,
@@ -137,7 +137,7 @@ class objectlist {
         let self = this;
 
         this.socket.send({
-            component: 'hfos.events.objectmanager',
+            component: 'isomer.events.objectmanager',
             action: 'add_role',
             data: {
                 schema: self.schemaname,

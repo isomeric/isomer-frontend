@@ -1,5 +1,5 @@
 /*
- * Hackerfleet Operating System
+ * Isomer Application Framework
  * ============================
  * Copyright (C) 2011 - 2018 riot <riot@c-base.org> and others.
  *
@@ -139,7 +139,7 @@ class ObjectProxy {
             // console.log('[OP] Proxied lists: ', self.lists);
         }
 
-        self.socket.listen('hfos.events.objectmanager', handleResponse);
+        self.socket.listen('isomer.events.objectmanager', handleResponse);
 
         this.search = function (schema, search, fields, fulltext, subscribe, limit, skip, sort) {
             console.debug('[OP] Async-getting list for schema ', schema, search);
@@ -155,7 +155,7 @@ class ObjectProxy {
             }
 
             let message = {
-                component: 'hfos.events.objectmanager',
+                component: 'isomer.events.objectmanager',
                 action: 'search',
                 data: {
                     req: reqid,
@@ -202,7 +202,7 @@ class ObjectProxy {
             let reqid = self.getRequestId();
 
             let message = {
-                component: 'hfos.events.objectmanager',
+                component: 'isomer.events.objectmanager',
                 action: 'get',
                 data: {
                     req: reqid,
@@ -232,7 +232,7 @@ class ObjectProxy {
             let reqid = self.getRequestId();
 
             let message = {
-                component: 'hfos.events.objectmanager',
+                component: 'isomer.events.objectmanager',
                 action: 'put',
                 data: {
                     req: reqid,
@@ -266,7 +266,7 @@ class ObjectProxy {
         console.warn('[OP] Fetching object synchronously:', schema, uuid);
 
         let message = {
-            component: 'hfos.events.objectmanager',
+            component: 'isomer.events.objectmanager',
             action: 'get',
             data: {
                 schema: schema,
@@ -307,7 +307,7 @@ class ObjectProxy {
         }
 
         let message = {
-            component: 'hfos.events.objectmanager',
+            component: 'isomer.events.objectmanager',
             action: 'subscribe',
             data: data
         };
@@ -325,7 +325,7 @@ class ObjectProxy {
         }
 
         let message = {
-            component: 'hfos.events.objectmanager',
+            component: 'isomer.events.objectmanager',
             action: 'unsubscribe',
             data: data
         };
@@ -337,7 +337,7 @@ class ObjectProxy {
         console.debug('[OP] Putting object ', schema, obj);
 
         let message = {
-            component: 'hfos.events.objectmanager',
+            component: 'isomer.events.objectmanager',
             action: 'put',
             data: {
                 schema: schema,
@@ -361,7 +361,7 @@ class ObjectProxy {
         };
 
         let message = {
-            component: 'hfos.events.objectmanager',
+            component: 'isomer.events.objectmanager',
             action: 'putchangeset',
             data: {
                 schema: schema,
@@ -379,7 +379,7 @@ class ObjectProxy {
         let reqid = this.getRequestId();
 
         this.socket.send({
-            component: 'hfos.events.objectmanager',
+            component: 'isomer.events.objectmanager',
             action: 'change',
             data: {
                 req: reqid,
@@ -406,7 +406,7 @@ class ObjectProxy {
         let reqid = this.getRequestId();
 
         let message = {
-            component: 'hfos.events.objectmanager',
+            component: 'isomer.events.objectmanager',
             action: 'delete',
             data: {
                 req: reqid,
@@ -433,7 +433,7 @@ class ObjectProxy {
         console.log('[OP] Getting object list ', schema, filter, fields);
 
         let message = {
-            component: 'hfos.events.objectmanager',
+            component: 'isomer.events.objectmanager',
             action: 'getlist',
             data: {
                 schema: schema,
