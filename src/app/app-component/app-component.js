@@ -68,21 +68,21 @@ class AppComponent {
         hotkeys.add({
             combo: 'f2',
             description: 'Go to feature menu',
-            callback: function() {
+            callback: function () {
                 self.state.go('app.menu');
             }
         });
         hotkeys.add({
             combo: 'ctrl+alt+a',
             description: 'Go to About',
-            callback: function() {
+            callback: function () {
                 self.state.go('app.about');
             }
         });
         hotkeys.add({
             combo: 'ctrl+alt+o',
             description: 'Immediately log out',
-            callback: function() {
+            callback: function () {
                 console.log('[APP] Logging out.');
                 self.user.logout(true, true);
             }
@@ -90,7 +90,7 @@ class AppComponent {
         hotkeys.add({
             combo: 'alt+h',
             description: 'Hide navigation and sidebars',
-            callback: function() {
+            callback: function () {
                 self.clutter_visible = !self.clutter_visible;
                 self.user.mainmenu_visible = self.clutter_visible;
                 self.statusbar_visible = self.clutter_visible;
@@ -101,7 +101,7 @@ class AppComponent {
             //  otherwise this one is not really helpful...
             combo: 'alt+i',
             description: 'Open & focus language selector',
-            callback: function() {
+            callback: function () {
                 self.language_selector_open = !self.language_selector_open;
             }
         });
@@ -110,7 +110,7 @@ class AppComponent {
             //  otherwise this one is not really helpful...
             combo: 'ctrl+alt+d',
             description: 'Toggle debug mode',
-            callback: function() {
+            callback: function () {
                 self.user.debug = !self.user.debug;
             }
         });
@@ -123,7 +123,7 @@ class AppComponent {
 
         let self = this;
 
-        this.socket.listen('isomer.ui.tagmanager', function(msg)  {
+        this.socket.listen('isomer.ui.tagmanager', function (msg) {
             console.log('[APP] Tag manager result:', msg);
         });
 
@@ -143,9 +143,7 @@ class AppComponent {
             // Set a nice background, if one is configured
             let background = self.user.profile.settings.background;
             //console.log("BG:", background, backgrounds);
-            if (background === "") {
-
-            } else if (background !== 'default') {
+            if (background !== 'default') {
                 console.log('url(/assets/images/backgrounds/' + background + ')');
                 $('body').css({
                     'background': 'url(/assets/images/backgrounds/' + background + ') no-repeat center center fixed',
