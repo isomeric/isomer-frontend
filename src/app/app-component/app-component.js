@@ -144,7 +144,7 @@ class AppComponent {
             let background = self.user.profile.settings.background;
             //console.log("BG:", background, backgrounds);
             if (background === "") {
-                return;
+
             } else if (background !== 'default') {
                 console.log('url(/assets/images/backgrounds/' + background + ')');
                 $('body').css({

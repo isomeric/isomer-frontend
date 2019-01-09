@@ -62,7 +62,7 @@ class featureMenu {
 
             self.changetimeout = null;
         };
-        const boxSize = 80
+        const boxSize = 80;
 
         this.gridsterOptions = {
             // any options that you can set for angular-gridster (see:  http://manifestwebdesign.github.io/angular-gridster/)
