@@ -73,7 +73,7 @@ manage tool to build and install the frontend:
     $ cd frontend
     $ git pull
     $ cd ..
-    $ python hfos_manage -install-frontend
+    $ python iso install frontend
 
 Be aware, that all Isomer modules you intend to use and develop on should
 be installed before building the frontend.
@@ -81,8 +81,6 @@ You can reinstall the frontend after changing what modules you're using.
 
 Assets
 ------
-
-This is migrating over to hfos-frontend submodule.
 
 -  Fabulous icons by iconmonstr.com and Hackerfleet contributors
 
