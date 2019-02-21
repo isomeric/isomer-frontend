@@ -36,7 +36,7 @@
                            title="{{'Node menu'|translate}}"
                            aria-haspopup="true"
                            aria-expanded="false" ng-click="$ctrl.home($event);">
-                            <ng-include src="'/assets/images/logo32.svg'"
+                            <ng-include src="$ctrl.user.menu_icon_url"
                                         class="instance-logo instance-logo-small"></ng-include>
                         </a>
                         <featuremenu ng-if="$ctrl.user.signedin === true" class="dropdown-menu">

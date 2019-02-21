@@ -78,6 +78,9 @@ class UserService {
 
         this.languages = {};
 
+        this.logo_url = '/assets/images/node_logo_colored.svg';
+        this.menu_icon_url = '/assets/images/logo32.svg';
+
         this.mainmenu_visible = true;
 
         this.login_dialog = null;
