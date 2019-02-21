@@ -26,7 +26,8 @@ let PARAMS_DEFAULT = {
             //'angular-schema-form-bootstrap': '../node_modules/angular-schema-form-bootstrap/bootstrap-decorator.js'
             'phaser': __dirname + '/node_modules/phaser-ce/build/custom/phaser-split.js',
             'pixi': __dirname + '/node_modules/phaser-ce/build/custom/pixi.js',
-            'p2': __dirname + '/node_modules/phaser-ce/build/custom/p2.js'
+            'p2': __dirname + '/node_modules/phaser-ce/build/custom/p2.js',
+            'scss': __dirname + '/src/scss'
         }
     },
     target: 'web',
