@@ -93,7 +93,7 @@ require('angular-bootstrap-slider');
 require('angular-uuid');
 require('angularjs-scroll-glue/src/scrollglue');
 require('angular-moment');
-require('schema-form-datetimepicker/schema-form-date-time-picker.min');
+require('schema-form-datetimepicker/schema-form-date-time-picker');
 require('angular-pull-to-refresh/dist/angular-pull-to-refresh');
 require('angular-media-queries/match-media');
 import ngTableModule from 'ng-table/bundles/ng-table';
