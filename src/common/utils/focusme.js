@@ -1,7 +1,7 @@
 /*
- * Isomer Application Framework
- * ============================
- * Copyright (C) 2011 - 2018 riot <riot@c-base.org> and others.
+ * Isomer - The distributed application framework
+ * ==============================================
+ * Copyright (C) 2011-2019 Heiko 'riot' Weinen <riot@c-base.org> and others.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -11,7 +11,7 @@
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
