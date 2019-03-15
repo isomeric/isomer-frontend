@@ -4,5 +4,5 @@ dist
 .tmp
 .sass-cache
 bower_components
-src/components
+src/components/*
 /src/main.js
