@@ -42,7 +42,9 @@ class objecteditor {
 
         this.debug = false;
         this.readonly = false;
-        this.form_options = {};
+        this.form_options = {
+            setSchemaDefaults: true
+        };
 
         this.live = false;
         this.livewatcher = null;
