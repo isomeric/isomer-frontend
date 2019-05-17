@@ -92,11 +92,11 @@ class ObjectProxy {
                 }
                 let signal = '';
                 if (msg.action === 'get') {
-                    signal = 'OP.Get'
+                    signal = 'OP.Get';
                 } else if (msg.action === 'update') {
-                    signal = 'OP.Update'
+                    signal = 'OP.Update';
                 } else if (msg.action === 'change') {
-                    signal = 'OP.Change'
+                    signal = 'OP.Change';
                 }
                 self.rootscope.$broadcast(signal, uuid, data, schema);
             } else if (msg.action === 'fail') {
