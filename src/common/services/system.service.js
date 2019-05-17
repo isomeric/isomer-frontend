@@ -58,8 +58,12 @@ class SystemconfigService {
                                 state_args = null;
                             }
 
-                            console.log('[SYS] Initial logon state:', self.config.initial_state, state_args);
-                            self.state.go(self.config.initial_state, state_args);
+                            if (typeof self.config.initial_state !== 'undefined' &&
+                                self.config.initial_state !== null &&
+                                self.config.initial_state !== '') {
+                                console.log('[SYS] Initial logon state:', self.config.initial_state, state_args);
+                                self.state.go(self.config.initial_state, state_args);
+                            }
                         }
                     }
                 });
