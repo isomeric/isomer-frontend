@@ -311,7 +311,7 @@ class SocketService {
             if (self.connected) {
                 console.debug('[SOCKET] Transmitting ping');
                 let packet = {
-                    component: 'isomer.ui.clientmanager',
+                    component: 'isomer.ui.clientmanager.latency',
                     action: 'ping',
                     data: new Date().getTime()
                 };

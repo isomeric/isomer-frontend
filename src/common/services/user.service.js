@@ -157,7 +157,7 @@ class UserService {
 
         function requestLanguages() {
             let request = {
-                component: 'isomer.ui.clientmanager',
+                component: 'isomer.ui.clientmanager.languages',
                 action: 'getlanguages'
             };
 
@@ -298,7 +298,7 @@ class UserService {
             }
         });
 
-        this.socket.listen('isomer.ui.clientmanager', handleLanguages);
+        this.socket.listen('isomer.ui.clientmanager.languages', handleLanguages);
         this.socket.listen('auth', loginaction);
         this.socket.listen('profile', storeprofile);
         this.socket.listen('clientconfig', store_client_configuration);
@@ -562,7 +562,7 @@ class UserService {
         self.gettextCatalog.loadRemote("/l10n/frontend." + token + ".json");
 
         let request = {
-            component: 'isomer.ui.clientmanager',
+            component: 'isomer.ui.clientmanager.languages',
             action: 'selectlanguage',
             data: token
         };
