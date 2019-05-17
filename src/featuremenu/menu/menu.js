@@ -53,7 +53,7 @@ class featureMenu {
                         row: item.row,
                         col: item.col,
                         size: item.size
-                    })
+                    });
                 }
                 console.log('[MENU] Pushing menu to profile:', menu);
                 self.user.profile.settings.menu = menu;
@@ -218,8 +218,14 @@ class featureMenu {
             }
         }
 
-        this.rootscope.$on('Profile.Update', self.updateMenu);
-        this.rootscope.$on('User.Login', self.updateMenu);
+        this.rootscope.$on('Profile.Update', function() {
+            console.log('[MENU] Profile updated');
+            self.updateMenu();
+        });
+        this.rootscope.$on('User.Login', function() {
+            console.log('[MENU] Profile updated');
+            self.updateMenu();
+        });
     }
 
     toggleLock(event) {
