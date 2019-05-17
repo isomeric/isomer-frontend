@@ -151,6 +151,8 @@ class SocketService {
                     'duration': interval / 1000
                 });
 
+                self.statusbar.add('warning', self.gettextCatalog.getString('Connection lost'));
+
                 let color = function (value) {
                     return '#FF' + parseInt((1 - value) * 255).toString(16) + '00';
                 };
@@ -191,7 +193,11 @@ class SocketService {
                 'duration': 5
             });
 
-            if (self.pingTimer === null) self.pingTimer = self.$interval(self.ping, 30000);
+            self.statusbar.add('success', self.gettextCatalog.getString('Connection established'));
+
+            if (self.pingTimer === null) {
+                self.pingTimer = self.$interval(self.ping, 30000);
+            }
 
 
             self.rootscope.$broadcast('Client.Connect');
