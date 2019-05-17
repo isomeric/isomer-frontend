@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import configurationicon from '../../assets/images/icons/iconmonstr-wrench-4-icon.svg'
+import configurationicon from '../../assets/images/icons/iconmonstr-wrench-4-icon.svg';
 
 export function routing($stateProvider) {
 
