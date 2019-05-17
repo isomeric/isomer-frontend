@@ -18,7 +18,9 @@
  */
 
 class objectlist {
-    constructor($stateParams, $rootScope, schemata, objectproxy, user, notification, socket) {
+    constructor($scope, $stateParams, $rootScope, schemata, objectproxy, user, notification, socket) {
+        this.scope = $scope;
+        $scope.stateParams = $stateParams;
         this.rootscope = $rootScope;
         this.schemata = schemata;
         this.objectproxy = objectproxy;
@@ -26,9 +28,9 @@ class objectlist {
         this.notification = notification;
         this.socket = socket;
 
-        this.schemaname = $stateParams.schema;
-
-        this.schemascreenname = this.schemaname.charAt(0).toUpperCase() + this.schemaname.slice(1);
+        this.schema = '';
+        this.schemaname = '';
+        this.schemascreenname = '';
 
         this.schemadata = {};
         this.filter = {};
@@ -40,12 +42,29 @@ class objectlist {
         this.select_state = false;
         this.selected_permissions = {};
 
-        if (user.signedin) {
+
+    }
+
+    $onInit() {
+        if (typeof this.scope.stateParams.schema !== 'undefined') {
+            console.log('[OL] Getting params from stateparams');
+            this.schema = this.scope.stateParams.schema;
+        } else {
+            console.log('[OL] Getting params from scope:', this.schema);
+
+        }
+
+        this.schemaname = this.schema;
+
+        this.schemascreenname = this.schemaname.charAt(0).toUpperCase() + this.schemaname.slice(1);
+
+        console.log('SCHEMA:', this.schema);
+
+        if (this.user.signedin) {
             this.getData();
         }
 
         let self = this;
-
         this.rootscope.$on('User.Login', function () {
             console.log('[OE] User logged in, getting current page.');
             // TODO: Check if user modified object - offer merging
@@ -80,6 +99,8 @@ class objectlist {
                 delete self.objectlisttoggles[msg.data.uuid];
             }
         });
+
+
     }
 
     unselect() {
@@ -194,6 +215,6 @@ class objectlist {
 
 }
 
-objectlist.$inject = ['$stateParams', '$rootScope', 'schemata', 'objectproxy', 'user', 'notification', 'socket'];
+objectlist.$inject = ['$scope', '$stateParams', '$rootScope', 'schemata', 'objectproxy', 'user', 'notification', 'socket'];
 
 export default objectlist;

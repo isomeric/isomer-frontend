@@ -89,6 +89,19 @@ export default angular
             })
         }
     })
-    .component('objectlist', {controller: list, template: listtemplate})
+    .component('objectlist', {
+        controller: list,
+        template: listtemplate,
+        bindings: {schema: '@'},
+        link: function(scope, elem, attrs) {
+            attrs.$observe(function() {
+                console.log('OBSERVING');
+                return attrs.uuid;
+            }, function(val) {
+                console.log('HELLO, I changed');
+                scope.$emit('UUIDChange');
+            })
+        }
+    })
     .component('configurator', {controller: configurator, template: configuratortemplate})
     .name;
