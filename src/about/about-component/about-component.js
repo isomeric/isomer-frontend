@@ -142,6 +142,10 @@ class AboutComponent {
         this.notification.add('warning', 'Caption', 'Alert text', 0);
     }
 
+    testProfileUpdate() {
+        this.rootscope.$broadcast('Profile.Update');
+    }
+
 }
 
 AboutComponent.$inject = [
