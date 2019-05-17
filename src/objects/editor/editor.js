@@ -149,12 +149,16 @@ class objecteditor {
             }
         };
 
-        this.getupdate = this.rootscope.$on('OP.Get', function (ev, uuid) {
-            self.updateModel(uuid);
+        this.getupdate = this.rootscope.$on('OP.Get', function (ev, uuid, data, schema) {
+            if (schema === self.config.schema && uuid === self.config.uuid) {
+                self.updateModel(uuid);
+            }
         });
 
-        this.objupdate = this.rootscope.$on('OP.Update', function (ev, uuid) {
-            self.updateModel(uuid);
+        this.objupdate = this.rootscope.$on('OP.Update', function (ev, uuid, data, schema) {
+            if (schema === self.schema && uuid === self.uuid) {
+                self.updateModel(uuid);
+            }
         });
 
         this.loginupdate = this.rootscope.$on('User.Login', function () {
