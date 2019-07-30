@@ -56,37 +56,50 @@
                             </span>
                         </li>
                     </ul>
-
-                    <div role="group">
-                        <a href="mailto:{{$ctrl.systemconfig.config.contact}}?subject=Isomer node {{$ctrl.systemconfig.nodename}}"
-                           ng-show="{{$ctrl.systemconfig.config.contact !== undefined}}"
-                           role="link" class="btn btn-block btn-info" translate>
-                            Contact this node's maintainer
-                        </a>
-                        <a href="mailto:riot@c-base.org?subject=Isomer Framework Contact"
-                           role="link" class="btn btn-block btn-info" translate>
-                            Contact the isomer framework maintainers
-                        </a>
-                        <a ng-click="$ctrl.toggleDebug()" ng-show="$ctrl.counter >= 5" type="button"
-                           class="btn btn-block btn-warning"
-                           style="align: center" ng-class="{active: $ctrl.user.debug}">
-                            <span class="glyphicon glyphicon-alert"></span>
-                        </a>
-                        <div class="btn-group btn-block">
-                            <button type="button" class="btn btn-block btn-success dropdown-toggle"
-                                    data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                <span translate>Report Bugs</span><span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="https://github.com/isomeric/isomer/issues" target="_blank" translate>
-                                    Browse on Github
-                                </a></li>
-                                <li><a href="https://github.com/isomeric/isomer/issues/new" target="_blank" translate>
-                                    Report on Github
-                                </a></li>
+                    <div class="row">
+                        <div class="col-md-6" role="group">
+                            <a href="mailto:{{$ctrl.systemconfig.config.contact}}?subject=Isomer node {{$ctrl.systemconfig.nodename}}"
+                               ng-show="{{$ctrl.systemconfig.config.contact !== undefined}}"
+                               role="link" class="btn btn-block btn-info" translate>
+                                <span class="pull-left fa fa-envelope"></span>
+                                Contact this node's maintainer
+                            </a>
+                            <a href="mailto:riot@c-base.org?subject=Isomer Framework Contact"
+                               role="link" class="btn btn-block btn-info" translate>
+                                <span class="pull-left fa fa-envelope"></span>
+                                Contact the isomer framework maintainers
+                            </a>
+                            <div class="btn-group btn-block">
+                                <button type="button" class="btn btn-block btn-success dropdown-toggle"
+                                        data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                    <span class="pull-left fa fa-bug"></span>
+                                    <span translate>Report Bugs</span><span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="https://github.com/isomeric/isomer/issues" target="_blank" translate>
+                                        Browse on Github
+                                    </a></li>
+                                    <li><a href="https://github.com/isomeric/isomer/issues/new" target="_blank" translate>
+                                        Report on Github
+                                    </a></li>
+                                </ul>
+                            </div>
+                            <a ng-click="$ctrl.toggleDebug()" ng-show="$ctrl.counter >= 5" type="button"
+                               class="btn btn-block btn-warning"
+                               style="align: center" ng-class="{active: $ctrl.user.debug}">
+                                <span class="pull-left glyphicon glyphicon-alert"></span>
+                                Debug
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <ul id="packageList">
+                                <li ng-repeat="item in $ctrl.systemconfig.config.packages">
+                                    <span><b>{{item.name}}</b> <i class="pull-right">{{item.version}}</i></span>
+                                </li>
                             </ul>
                         </div>
+
                     </div>
                 </div>
             </div>

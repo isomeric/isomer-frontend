@@ -17,6 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+import './about-component/about.scss';
+
 import angular from 'angular';
 import uirouter from 'angular-ui-router';
 

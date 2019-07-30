@@ -17,19 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#compass {
-    width: 330px;
-    height: 330px;
-    background-image: url('/assets/images/hackerfleet.svg');
-    background-size: 100% auto;
-    position: relative;
-}
-
-#links {
+#packageList {
     text-align: left;
-    width: 20%;
-}
-
-#content {
-    color: black;
+    overflow-y: auto;
+    max-height: 20vh;
+    list-style: none;
+    padding-right: 20px;
+    padding-left: 0;
+    li {
+        list-style: none;
+    }
 }
