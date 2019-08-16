@@ -90,6 +90,7 @@ class UserService {
         this.embed_options = {
             watchEmbedData: true,
             sanitizeHtml: false,
+            link: false,
             linkTarget: '_blank',
             code: {
                 highlight: false
