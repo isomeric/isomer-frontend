@@ -191,7 +191,9 @@ class objectlist {
         };
 
         for (let uuid of Object.keys(this.objectlisttoggles)) {
-            if (this.objectlisttoggles[uuid] === true) this.selected_objects.push(uuid);
+            if (this.objectlisttoggles[uuid] === true) {
+                this.selected_objects.push(uuid);
+            }
             update_selected_perms(this.objectlistdata[uuid]);
         }
     }
