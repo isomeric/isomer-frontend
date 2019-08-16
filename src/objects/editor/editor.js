@@ -63,9 +63,11 @@ class objecteditor {
 
         this.scope.$on('Changed.UUID', function (event, val) {
             console.debug('[OE] Change Event:', event, val);
-            if (val.eid === self.config.eid) {
-                console.log('[OE] UUID changed:', self.uuid);
+            if (val.eid !== self.config.eid) {
+                console.log('[OE] UUID changed:', val.uuid);
+                self.uuid = val.uuid;
                 self.config.uuid = val.uuid;
+                self.config.action = 'Edit';
                 self.getData();
             }
         });
@@ -179,7 +181,7 @@ class objecteditor {
         this.getData = function () {
             console.log('[OE] Getting schema for ', self.config.schema);
             self.schemadata = self.schemata.get(self.config.schema);
-            if (self.config.action !== 'Create' && self.config.uuid !== '') {
+            if (self.config.action !== 'Create') {
                 console.log('[OE] Requesting object.');
                 // TODO: What? Uuh:
                 self.objectproxy.get(self.config.schema, self.config.uuid, true).then(function (data) {
@@ -342,10 +344,12 @@ class objecteditor {
             if (msg.action === 'put') {
                 if (msg.data.uuid === self.config.uuid) {
                     console.debug('[OE] Known object stored');
+                    self.model = msg.data.object;
                     self.markStored();
                 } else if (typeof self.config.uuid === "undefined" || self.config.uuid === "") {
                     console.debug('[OE] New object stored');
                     self.config.uuid = msg.data.uuid;
+                    self.model = msg.data.object;
                     self.markStored();
                 } else {
                     console.log('[OE] I do not know what happened:', msg, self.config);
