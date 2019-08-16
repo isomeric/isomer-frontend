@@ -17,9 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-@import 'colors', 'fonts', 'icons', 'animations';
-@import 'editor', 'login', 'buttons', 'navigation';
+// SASS style sheet
+// UI Control styling
 
-@import 'widgets/rating', 'widgets/scrollbar', 'widgets/sidebar';
-
-@import 'controls', 'utilities', 'unsorted';
+.indeterminate {
+    opacity: 0.5;
+}
