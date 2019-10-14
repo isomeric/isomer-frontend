@@ -63,12 +63,14 @@ class objecteditor {
 
         this.scope.$on('Changed.UUID', function (event, val) {
             console.debug('[OE] Change Event:', event, val);
-            if (val.eid !== self.config.eid) {
+            if (val.eid === self.config.eid) {
                 console.log('[OE] UUID changed:', val.uuid);
                 self.uuid = val.uuid;
                 self.config.uuid = val.uuid;
                 self.config.action = 'Edit';
                 self.getData();
+            } else {
+                console.debug('[OE] Not for this eid:', val.eid, self.config.eid);
             }
         });
 
@@ -298,13 +300,19 @@ class objecteditor {
         }
     }
 
-    formAction(target, action, uuid) {
-        console.log('[OE] FormAction initiated: ', target, action, uuid);
+    formAction(target, action, data) {
+        console.log('[OE] FormAction initiated: ', target, action, data);
+
+        if (data === 'model') {
+            data = this.model;
+        } else if (data === 'uuid') {
+            data = this.model.uuid;
+        }
 
         this.socket.send({
             'component': target,
             'action': action,
-            'data': uuid
+            'data': data
         });
     }
 
