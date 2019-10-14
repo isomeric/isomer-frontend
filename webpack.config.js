@@ -43,6 +43,7 @@ let PARAMS_DEFAULT = {
 
             'angular-animate',
             'angular-sanitize',
+            'angular-moment',
 
             'objectpath',
 
@@ -104,7 +105,10 @@ let PARAMS_PER_TARGET = {
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
             new webpack.SourceMapDevToolPlugin({filename: '[file].map'}),
-            new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.js'}),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor',
+                filename: 'vendor.js'
+            }),
             new webpack.LoaderOptionsPlugin({
                 debug: true
             })
@@ -117,7 +121,10 @@ let PARAMS_PER_TARGET = {
         devtool: 'cheap-source-map',
         plugins: [
             new CleanWebpackPlugin(['build']),
-            new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.[chunkhash].js'}),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor',
+                filename: 'vendor.[chunkhash].js'
+            }),
             new webpack.LoaderOptionsPlugin({
                 debug: true
             })
@@ -129,7 +136,10 @@ let PARAMS_PER_TARGET = {
         },
         plugins: [
             new CleanWebpackPlugin(['dist']),
-            new webpack.optimize.CommonsChunkPlugin({name: 'vendor', filename: 'vendor.[chunkhash].js'}),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor',
+                filename: 'vendor.[chunkhash].js'
+            }),
             //new Uglify()
             new CompressionPlugin({
                 asset: '[path].gz[query]',
@@ -153,9 +163,16 @@ module.exports = {
     output: params.output,
     module: {
         loaders: [
-            {test: /\.js$/, loader: 'babel-loader', exclude: /(\.test.js$|node_modules)/},
-            {test: require.resolve('jquery'), loader: 'expose-loader?$!expose-loader?jQuery'},
-            {test: require.resolve('moment'), loader: 'expose-loader?moment'},
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                exclude: /(\.test.js$|node_modules)/
+            },
+            {
+                test: require.resolve('jquery'),
+                loader: 'expose-loader?$!expose-loader?jQuery'
+            },
+            //{test: require.resolve('moment'), loader: 'expose-loader?moment'},
             {test: /\.css$/, loader: 'style-loader!css-loader'},
             {test: /\.tpl.html/, loader: 'html-loader', exclude: /(index.html)/},
             {test: /\.json/, loader: 'json-loader'},
@@ -188,7 +205,32 @@ module.exports = {
                     'exports-loader?window.tinymce',
                     'imports-loader?this=>window'
                 ]
-            }
+            },
+            {
+                test: require.resolve('css-element-queries/src/ResizeSensor'),
+                loader: 'script-loader'
+            },
+            {
+                test: require.resolve('moment'),
+                use: [
+                    {
+                        loader: 'expose-loader',
+                        options: 'moment'
+                    }
+                ]
+            },
+            {
+                test: require.resolve('css-element-queries/src/ElementQueries'),
+                use: [
+                    {
+                        loader: 'script-loader',
+                    }
+                ]
+            },
+            {
+                test: require.resolve('angular-gantt'),
+                loader: 'script-loader'
+            },
         ]
     },
     plugins: params.plugins,
