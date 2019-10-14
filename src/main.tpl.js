@@ -51,7 +51,7 @@ import './customization.scss';
 require('jquery');
 require('jqueryui');
 //import bootstrap from 'bootstrap';
-require('moment');
+import * as moment from 'moment';
 require('moment-timezone');
 import angular from 'angular';
 import sanitize from 'angular-sanitize';
