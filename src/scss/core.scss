@@ -20,6 +20,9 @@
 @import 'colors', 'fonts', 'icons', 'animations';
 @import 'editor', 'login', 'buttons', 'navigation';
 
-@import 'widgets/rating', 'widgets/scrollbar', 'widgets/sidebar';
+@import 'widgets/rating.scss',
+        'widgets/scrollbar.scss',
+        'widgets/sidebar.scss',
+        'widgets/tooltip.scss';
 
 @import 'controls', 'utilities', 'unsorted';

@@ -1,0 +1,69 @@
+/*!
+ * Isomer - The distributed application framework
+ * ==============================================
+ * Copyright (C) 2011-2019 Heiko 'riot' Weinen <riot@c-base.org> and others.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+@import '~scss/colors';
+
+
+/* hint container */
+.hint {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    font-size: small;
+    color: $color-primary-4
+}
+
+/* hint text */
+.hint .hinttext {
+    visibility: hidden;
+    width: 120px;
+    background-color: $color-gray-dark;
+    color: $color-white;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the hint text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    /* Fade in hint */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+/* hint arrow */
+.hint .hinttext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: $color-gray-dark transparent transparent transparent;
+}
+
+/* Show the hint text when you mouse over the hint container */
+.hint:hover .hinttext {
+    visibility: visible;
+    opacity: 1;
+}
