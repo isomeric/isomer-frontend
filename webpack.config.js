@@ -27,7 +27,12 @@ let PARAMS_DEFAULT = {
             'phaser': __dirname + '/node_modules/phaser-ce/build/custom/phaser-split.js',
             'pixi': __dirname + '/node_modules/phaser-ce/build/custom/pixi.js',
             'p2': __dirname + '/node_modules/phaser-ce/build/custom/p2.js',
-            'scss': __dirname + '/src/scss'
+            'scss': __dirname + '/src/scss',
+            'ResizeSensor': 'css-element-queries/src/ResizeSensor',
+            'ElementQueries': 'css-element-queries/src/ElementQueries',
+            'jsPlumb': 'jsplumb/dist/js/jsplumb',
+            'ui.tree': 'angular-ui-tree/dist/angular-ui-tree',
+            'angular-gantt': 'angular-gantt'
         }
     },
     target: 'web',
@@ -207,10 +212,6 @@ module.exports = {
                 ]
             },
             {
-                test: require.resolve('css-element-queries/src/ResizeSensor'),
-                loader: 'script-loader'
-            },
-            {
                 test: require.resolve('moment'),
                 use: [
                     {
@@ -218,19 +219,7 @@ module.exports = {
                         options: 'moment'
                     }
                 ]
-            },
-            {
-                test: require.resolve('css-element-queries/src/ElementQueries'),
-                use: [
-                    {
-                        loader: 'script-loader',
-                    }
-                ]
-            },
-            {
-                test: require.resolve('angular-gantt'),
-                loader: 'script-loader'
-            },
+            }
         ]
     },
     plugins: params.plugins,
