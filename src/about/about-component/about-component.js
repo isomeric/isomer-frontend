@@ -52,9 +52,13 @@ class AboutComponent {
             max: 10,
             min: 1,
             step: 1,
-            value: 5
+            value: 5,
+            barColor: "rgba(0,0,0,0)",
+            trackColor: "black"
         };
         this.sliderValue = 5;
+        this.knobValue = 5;
+
         this.colorValue = "";
         this.datetimeValue = new Date();
 
