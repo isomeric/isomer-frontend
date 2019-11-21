@@ -97,6 +97,7 @@ require('schema-form-datetimepicker/schema-form-date-time-picker');
 require('angular-pull-to-refresh/dist/angular-pull-to-refresh');
 require('angular-media-queries/match-media');
 require('angular-ui-indeterminate');
+require('ng-ui-knob/dist/ng-knob');
 import ngTableModule from 'ng-table/bundles/ng-table';
 
 require('humanize-duration');
@@ -117,7 +118,7 @@ import doc from './doc/doc.module';
 let modules = ['mgcrea.ngStrap', 'gridster', 'ngDraggable', 'FBAngular', 'ui.bootstrap-slider', 'angularSpectrumColorpicker',
     'angularSpinner', 'angular-uuid', 'luegg.directives', 'angularMoment', 'ngTable', 'ngEmbed', 'gettext', 'matchMedia',
     'schemaForm-datepicker', 'schemaForm-timepicker', 'schemaForm-datetimepicker', 'ngDragDrop', 'mgcrea.pullToRefresh',
-    'ng-countryflags', 'cfp.hotkeys', 'angular.filter', 'ui.indeterminate',
+    'ng-countryflags', 'cfp.hotkeys', 'angular.filter', 'ui.indeterminate', 'ui.knob',
     animate, app, common, objects, cookies, sanitize, touch, ui, featuremenu, about, systemlog,
     doc, clipboard.name, tree, localstorage, ngQrcode
 ];
