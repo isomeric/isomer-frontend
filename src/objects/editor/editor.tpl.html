@@ -20,7 +20,13 @@
 
 <div class="well">
     <H1>{{$ctrl.config.action}}: <a href="#!/list/{{$ctrl.schemadata.schema.name}}">{{$ctrl.schemascreenname}}</a>/<a
-        href="#!/editor/{{$ctrl.schemadata.schema.name}}/{{$ctrl.model.uuid}}/edit">{{$ctrl.model.name}}</a></H1>
+        href="#!/editor/{{$ctrl.schemadata.schema.name}}/{{$ctrl.model.uuid}}/edit">{{$ctrl.model.name}}</a>
+        <spectrum-colorpicker
+            ng-show="$ctrl.schemadata.schema.properties.color != null"
+            ng-model="$ctrl.model.color"
+            options="$ctrl.user.colorPickerOptions">
+        </spectrum-colorpicker>
+    </H1>
     <div class="bg-danger" ng-show="$ctrl.schemata.indexOf($ctrl.schema) < 0" translate>
         Unknown schema!
     </div>
@@ -55,9 +61,10 @@
     </form>
 
     <div ng-show="$ctrl.debug">
+        <hr>
             <span class="fa" ng-click="argsCollapsed = !argsCollapsed" ng-class="{'fa-chevron-right': argsCollapsed,
             'fa-chevron-down': !argsCollapsed}"></span>
-        <pre uib-collapse="argsCollapsed">{{$ctrl.action}} - {{$ctrl.schema}}:{{$ctrl.uuid}}</pre>
+        <pre uib-collapse="argsCollapsed">{{$ctrl.action}} - {{$ctrl.schemadata.schema}}:{{$ctrl.uuid}}</pre>
 
         <hr>
 
