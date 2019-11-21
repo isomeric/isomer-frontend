@@ -197,8 +197,31 @@ class objecteditor {
             if (search === '') {
                 console.debug("[OE] Insidemodel:", options.scope.insidemodel);
             }
+            if (typeof search === 'undefined') {
+                search = '';
+            }
+            let filter = {
+                'name': {'$regex': search, '$options': '$i'}
+            };
 
-            let result = self.objectproxy.search(options.type, search).then(function (msg) {
+            if (typeof options.search_filter !== 'undefined') {
+                console.log('[OE] Applying search filter:', options.search_filter);
+                let searchFilter = options.search_filter;
+                console.log(searchFilter);
+
+                if ('name' in searchFilter) {
+                    console.log('[OE] Modifying name filter.');
+                    if (search === '') {
+                        filter.name = searchFilter.name;
+                    } else {
+                        filter.name = {'$and':[searchFilter.name, {'$regex': search, '$options': '$i'}]};
+                    }
+                }
+            }
+
+            console.log("[OE] Final filter:", filter);
+
+            let result = self.objectproxy.search(options.type, filter).then(function (msg) {
                 console.debug('[OE] FormData:', msg);
                 return msg.data.list;
 
@@ -407,6 +430,6 @@ class objecteditor {
     }
 }
 
-objecteditor.$inject = ['$scope', '$stateParams', 'objectproxy', 'user', 'socket', 'schemata', '$rootScope', 'notification', '$state'];
+objecteditor.$inject = ['$scope', '$stateParams', 'objectproxy', 'user', 'socket', 'dev.system.schemata', '$rootScope', 'notification', '$state'];
 
 export default objecteditor;
