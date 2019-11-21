@@ -85,6 +85,16 @@ class UserService {
 
         this.login_dialog = null;
 
+        this.colorPickerOptions = {
+            showPalette: true,
+            color: 'blanchedalmond',
+            palette: [
+                ['black', 'white', 'blanchedalmond',
+                    'rgb(255, 128, 0);', 'hsv 100 70 50'],
+                ['red', 'yellow', 'green', 'blue', 'violet']
+            ]
+        };
+
         this.embed_external = false;
 
         this.embed_options = {
@@ -133,8 +143,8 @@ class UserService {
                 'success',
                 self.gettextCatalog.getString('Registration successful'),
                 self.gettextCatalog.getString('<br />Welcome to this Isomer node! Now is a good time to fill out your profile.<br />' +
-                'Click the user button <a href="/#!/editor/profile/' + self.useruuid + '/edit">to edit your profile</a>, ' +
-                'logout or change your password.<br /> <small>Adding some user data will prevent this notification from reappearing.</small>'),
+                    'Click the user button <a href="/#!/editor/profile/' + self.useruuid + '/edit">to edit your profile</a>, ' +
+                    'logout or change your password.<br /> <small>Adding some user data will prevent this notification from reappearing.</small>'),
                 30
             );
         };
@@ -288,13 +298,13 @@ class UserService {
         hotkeys.add({
             combo: 'alt+u',
             description: 'Open user actions',
-            callback: function() {
+            callback: function () {
                 self.login();
             }
         });
         hotkeys.add({
             combo: 'ctrl+alt+d',
-            callback: function() {
+            callback: function () {
                 self.debug = !self.debug;
             }
         });
@@ -320,8 +330,7 @@ class UserService {
         if (this.fullscreen.isEnabled()) {
             this.fullscreen.cancel();
             this.fullscreen_enabled = false;
-        }
-        else {
+        } else {
             this.fullscreen.all();
             this.fullscreen_enabled = true;
         }
@@ -388,7 +397,7 @@ class UserService {
             console.log('[USER] Already logged in. Showing Profile.');
             this.showuseractions();
         } else {
-            if (typeof(username) === 'undefined') {
+            if (typeof (username) === 'undefined') {
                 console.log('[USER] No username given, showing login dialog.');
 
                 this.showlogin();
@@ -473,7 +482,11 @@ class UserService {
     }
 
     showprofile() {
-        this.state.go('app.editor', {schema: 'profile', action: 'edit', 'uuid': this.profile.uuid});
+        this.state.go('app.editor', {
+            schema: 'profile',
+            action: 'edit',
+            'uuid': this.profile.uuid
+        });
     }
 
     changePassword() {
