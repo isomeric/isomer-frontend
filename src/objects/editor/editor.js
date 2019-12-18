@@ -430,6 +430,6 @@ class objecteditor {
     }
 }
 
-objecteditor.$inject = ['$scope', '$stateParams', 'objectproxy', 'user', 'socket', 'dev.system.schemata', '$rootScope', 'notification', '$state'];
+objecteditor.$inject = ['$scope', '$stateParams', 'objectproxy', 'user', 'socket', 'schemata', '$rootScope', 'notification', '$state'];
 
 export default objecteditor;
