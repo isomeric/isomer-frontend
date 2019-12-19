@@ -186,13 +186,13 @@ module.exports = {
                 test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff(2)).*$/,
                 use: [
                     'file-loader',
-                    {
-                        loader: 'image-webpack-loader',
-                        options: {
-                            bypassOnDebug: true // webpack@1.x
-                            //disable: true, // webpack@2.x and newer
-                        }
-                    }
+                    // {
+                    //     loader: 'image-webpack-loader',
+                    //     options: {
+                    //         bypassOnDebug: true // webpack@1.x
+                    //         //disable: true, // webpack@2.x and newer
+                    //     }
+                    // }
                 ]
             },
             //{test: /[\/]angular\.js$/, loader: "exports-loader?angular"},
