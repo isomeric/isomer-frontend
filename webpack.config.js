@@ -196,7 +196,18 @@ module.exports = {
                 ]
             },
             //{test: /[\/]angular\.js$/, loader: "exports-loader?angular"},
-            {test: /\.scss/, loaders: ['style-loader', 'css-loader', 'sass-loader']},
+            {
+                test: /\.scss/, loaders: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            implementation: require('sass')
+                        }
+                    }
+                ]
+            },
             {
                 test: require.resolve('tinymce/tinymce'),
                 loaders: [
