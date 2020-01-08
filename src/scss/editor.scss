@@ -30,7 +30,7 @@
 
 .angular-ui-tree-node-active {
     background: $color-primary-1;
-    color: $color-gray-dark;
+    color: $color-secondary-1-4;
     font-weight: bold;
 }
 
@@ -38,6 +38,10 @@
     max-height: inherit;
     min-height: 50vh;
     overflow: auto;
+}
+
+.component-disabled {
+    color: $color-gray-light;
 }
 
 .header-row {

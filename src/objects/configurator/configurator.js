@@ -42,6 +42,7 @@ class configurator {
         this.changewatcher = null;
         this.configschemata = [];
 
+        this.hideMissing = true;
         this.debug = false;
 
         this.editorOptions = {
