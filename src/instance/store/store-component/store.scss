@@ -1,0 +1,63 @@
+/*
+ * Isomer - The distributed application framework
+ * ==============================================
+ * Copyright (C) 2011-2020 Heiko 'riot' Weinen <riot@c-base.org> and others.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+@import '../../../scss/colors';
+
+.store_list {
+  list-style: none;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding-left: 0;
+  margin-right: -10px;
+  padding-right: 40px;
+}
+
+.store-details {
+  max-height: 60vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.store-item {
+  cursor: pointer;
+}
+
+.store-item-selector {
+  padding-bottom: 10px;
+}
+
+.store-buttons {
+  .btn {
+    width: 6em;
+  }
+}
+
+.store-item-selected {
+  background: $color-primary-1;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.store-item-description {
+  h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+  }
+  margin-left: 10px;
+}

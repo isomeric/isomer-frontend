@@ -1,0 +1,191 @@
+<!--
+  ~ Isomer - The distributed application framework
+  ~ ==============================================
+  ~ Copyright (C) 2011-2019 Heiko 'riot' Weinen <riot@c-base.org> and others.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+
+<div class="well container-fluid">
+    <h1>Isomer Module Store</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <form class="form">
+                <div class="form-group clearable">
+                    <input type="search" class="form-control"
+                           ng-model="$ctrl.search_string">
+                    <span class="clearable__clear fa"
+                          style="top: 9px"
+                          ng-click="$ctrl.search_string = ''"
+                          ng-class="{'fa-search': $ctrl.search_string === '',
+                                     'fa-times': $ctrl.search_string !== ''}"></span>
+                </div>
+
+                <a ng-hide="$ctrl.updateables.length === 0"
+                   class="btn btn-success">
+                    Update All ({{$ctrl.updateables.length}})
+                </a>
+            </form>
+            <ul class="store_list">
+                <li ng-repeat="(key, item) in $ctrl.all_packages"
+                    ng-hide="$ctrl.search_string !== '' && item.name.toLowerCase().indexOf($ctrl.search_string.toLowerCase()) < 0"
+                    class="store-item">
+
+                    <div ng-click="$ctrl.selected = key" class="row store-item-selector">
+                        <div class="col-sm-2">
+                            <img height="50px"
+                                 width="50px"
+                                 ng-hide="item.preview === null || item.preview === ''"
+                                 src="data:image/JPEG;base64,{{item.preview}}"/>
+                            <img height="50px"
+                                 width="50px"
+                                 ng-hide="item.preview !== null && item.preview !== ''"
+                                 src="/assets/images/logo_75_white.png">
+                        </div>
+                        <div class="col-md-7 store-item-description">
+                            <h3>
+                                <span ng-show="$ctrl.unupdateables.indexOf(item.name) >= 0" class="fa fa-warning"></span>
+                                {{item.name}}
+                            </h3>
+                            <div>
+                                <span class="fa fa-download"></span> {{item.downloads}}
+                                <span class="fa fa-star-o"></span> {{item.stars}}
+                                <span>{{item.author}}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 store-buttons">
+                            <a ng-hide="$ctrl.updateables.indexOf(key) < 0"
+                               class="btn btn-block btn-success"
+                               ng-click="$ctrl.update(key)">
+                                Update
+                            </a>
+                            <a ng-hide="!$ctrl.store.packages.indexOf(key) >= 0 &&
+                                        $ctrl.local.current.hasOwnProperty(key)"
+                               class="btn btn-block btn-default"
+                               ng-click="$ctrl.install(key)">
+                                Install
+                            </a>
+                            <a ng-hide="!$ctrl.local.current.hasOwnProperty(key)"
+                               class="btn btn-block btn-danger"
+                               ng-click="$ctrl.uninstall(key)">
+                                Uninstall
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-lg-8 store-item-selected">
+            <div class="row" ng-if="$ctrl.selected != ''">
+                <div class="col-sm-2">
+                    <img height="100px"
+                         width="100px"
+                         ng-hide="$ctrl.all_packages[$ctrl.selected].preview === null || $ctrl.all_packages[$ctrl.selected].preview === ''"
+                         src="data:image/JPEG;base64,{{$ctrl.all_packages[$ctrl.selected].preview}}"/>
+                    <img height="100px"
+                         width="100px"
+                         ng-hide="$ctrl.all_packages[$ctrl.selected].preview !== null && $ctrl.all_packages[$ctrl.selected].preview !== ''"
+                         src="/assets/images/logo_75_white.png">
+                </div>
+                <div class="col-md-7">
+                    <h2>
+                        <span ng-show="$ctrl.unupdateables.indexOf(item.name) >= 0" class="fa fa-warning"></span>
+                        {{$ctrl.all_packages[$ctrl.selected].name}}
+                    </h2>
+
+                    <div>
+                        <a href="mailto:{{$ctrl.all_packages[$ctrl.selected].contact}}?subject=Isomer package: {{$ctrl.all_packages[$ctrl.selected].name}}">
+                            <span class="fa fa-envelope"></span>
+                            {{$ctrl.all_packages[$ctrl.selected].author}}
+                        </a>
+                    </div>
+                    <div>
+                        <a href="{{$ctrl.all_packages[$ctrl.selected].homepage}}" target="_blank">
+                            <span class="fa fa-home"></span>
+                        </a> |
+                        <span ng-hide="!$ctrl.local.current.hasOwnProperty($ctrl.selected)">
+                            Installed: {{$ctrl.local.current[$ctrl.selected].version}} -
+                        </span>
+                        <span ng-class="{'strong': $ctrl.local.current[$ctrl.selected].version != $ctrl.store.packages[$ctrl.selected].version}">
+                            Available: {{$ctrl.store.packages[$ctrl.selected].version}}
+                        </span>
+                    </div>
+                    <div ng-hide="$ctrl.store.packages.indexOf($ctrl.selected) < 0">
+                        <span ng-show="$ctrl.store.packages[$ctrl.selected].downloads > 0">
+                            <span class="fa fa-download"></span> {{$ctrl.store.packages[$ctrl.selected].downloads}} |
+                        </span>
+                        <span ng-show="$ctrl.store.packages[$ctrl.selected].stars > 0">
+                            <span class="fa fa-star-o"></span> {{$ctrl.store.packages[$ctrl.selected].stars}}
+                        </span>
+                    </div>
+
+                    <div>
+                        <span class="label label-primary">{{$ctrl.all_packages[$ctrl.selected].category}}</span>
+                        <span>{{$ctrl.all_packages[$ctrl.selected].date | date}}</span> |
+                        <span>{{$ctrl.all_packages[$ctrl.selected].license}}</span>
+                    </div>
+                </div>
+
+                <div class="col-md-3 store-buttons">
+                    <a ng-hide="$ctrl.updateables.indexOf($ctrl.selected) < 0"
+                       ng-click="$ctrl.update($ctrl.selected)"
+                       class="btn btn-block btn-success">
+                        Update
+                    </a>
+                    <a ng-hide="!$ctrl.store.packages.indexOf($ctrl.selected) >= 0 &&
+                                $ctrl.local.current.hasOwnProperty($ctrl.selected)"
+                       class="btn btn-block btn-default"
+                       ng-click="$ctrl.install($ctrl.selected)">
+                        Install
+                    </a>
+                    <a ng-hide="!$ctrl.local.current.hasOwnProperty($ctrl.selected)"
+                       class="btn btn-block btn-danger"
+                       ng-click="$ctrl.uninstall($ctrl.selected)">
+                        Uninstall
+                    </a>
+                </div>
+            </div>
+            <div class="store-details"
+                 ng-bind-html="$ctrl.all_packages[$ctrl.selected].info">
+            </div>
+        </div>
+    </div>
+    <div class="well" ng-if="$ctrl.user.debug">
+        <span class="fa" ng-click="statusListsCollapsed = !statusListsCollapsed"
+              ng-class="{'fa-chevron-right': statusListsCollapsed,
+                          'fa-chevron-down': !statusListsCollapsed}"></span>Status lists:
+        Not updateable:
+        <pre uib-collapse="statusListsCollapsed" ng-bind="$ctrl.unupdateables | json"></pre>
+        Updateable:
+        <pre uib-collapse="statusListsCollapsed" ng-bind="$ctrl.updateables | json"></pre>
+        <hr />
+        <span class="fa" ng-click="allPackagesCollapsed = !allPackagesCollapsed"
+               ng-class="{'fa-chevron-right': allPackagesCollapsed,
+                          'fa-chevron-down': !allPackagesCollapsed}"></span>All packages:
+        <pre uib-collapse="allPackagesCollapsed" ng-bind="$ctrl.all_packages | json"></pre>
+        <hr />
+        <span class="fa" ng-click="storePackagesCollapsed = !storePackagesCollapsed"
+              ng-class="{'fa-chevron-right': storePackagesCollapsed,
+                          'fa-chevron-down': !storePackagesCollapsed}"></span>Store packages:
+        <pre uib-collapse="storePackagesCollapsed" ng-bind="$ctrl.store | json"></pre>
+        <hr />
+        <span class="fa" ng-click="localPackagesCollapsed = !localPackagesCollapsed"
+              ng-class="{'fa-chevron-right': localPackagesCollapsed,
+                          'fa-chevron-down': !localPackagesCollapsed}"></span>Local packages:
+        <pre uib-collapse="localPackagesCollapsed" ng-bind="$ctrl.local | json"></pre>
+    </div>
+</div>
