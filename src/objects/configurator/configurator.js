@@ -121,7 +121,7 @@ class configurator {
 
         this.socket.listen('isomer.ui.configurator', this.configuratorupdate);
 
-            this.schemaupdate = this.rootscope.$on('Schemata.ConfigUpdate', function () {
+        this.schemaupdate = this.rootscope.$on('Schemata.ConfigUpdate', function () {
             console.log('[C] Configuration Schema update.');
             self.configschemadata = self.schemata.configschemata;
             self.configschemata = Object.keys(self.configschemadata);
