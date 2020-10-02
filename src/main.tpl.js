@@ -112,6 +112,8 @@ import objects from './objects/objects.module';
 import about from './about/about.module';
 import systemlog from './systemlog/systemlog.module';
 import doc from './doc/doc.module';
+import store from './instance/store/store.module';
+import overview from './instance/overview/overview.module';
 
 // Isomer Plugin Modules
 
