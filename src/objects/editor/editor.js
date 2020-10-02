@@ -21,7 +21,7 @@ let tv4 = require('tv4');
 
 class objecteditor {
 
-    constructor($scope, $stateParams, objectproxy, user, socket, schemata, $rootscope, notification, state) {
+    constructor($scope, $stateParams, objectproxy, user, socket, schemata, $rootscope, notification, state, $anchorScroll) {
         this.socket = socket;
         this.schemata = schemata;
         this.rootscope = $rootscope;
@@ -30,6 +30,7 @@ class objecteditor {
         this.user = user;
         this.objectproxy = objectproxy;
         this.scope = $scope;
+        this.anchorscroll = $anchorScroll;
         $scope.stateParams = $stateParams;
 
         console.log('[OE] STATEPARAMS: ', $stateParams);
@@ -40,7 +41,7 @@ class objecteditor {
         this.initial = {};
         this.eid = null;
 
-        this.debug = false;
+        this.show_raw = false;
         this.readonly = false;
         this.form_options = {
             setSchemaDefaults: true
@@ -430,6 +431,6 @@ class objecteditor {
     }
 }
 
-objecteditor.$inject = ['$scope', '$stateParams', 'objectproxy', 'user', 'socket', 'schemata', '$rootScope', 'notification', '$state'];
+objecteditor.$inject = ['$scope', '$stateParams', 'objectproxy', 'user', 'socket', 'schemata', '$rootScope', 'notification', '$state', '$anchorScroll'];
 
 export default objecteditor;
