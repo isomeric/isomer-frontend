@@ -42,6 +42,9 @@ import focusMe from './utils/focusme';
 import LoginController from './component/login-component';
 import LoginTemplate from './component/login.tpl.html';
 
+import CommentTreeController from './component/comment-tree';
+import CommentTreeTemplate from './templates/comment-tree.tpl.html';
+
 import resizer from './component/resizer';
 import pagetitle from './component/pagetitle';
 
@@ -58,6 +61,20 @@ export default angular
     .component('logindialog', {controller: LoginController, template: LoginTemplate})
     .component('userInfoComponent', UserInfoComponent)
     .component('fileUploadComponent', FileUploadComponent)
+    .component('commentTree', {
+        controller: CommentTreeController,
+        template: CommentTreeTemplate,
+        bindings: {commentObject: '@'},
+        link: function(scope, elem, attrs) {
+            attrs.$observe(function() {
+                console.log('OBSERVING');
+                return attrs.commentObject;
+            }, function(val) {
+                console.log('HELLO, I changed');
+                scope.$emit('UUIDChange');
+            });
+        }
+    })
     .service('notification', NotificationService)
     .service('infoscreen', InfoscreenService)
     .service('user', UserService)
