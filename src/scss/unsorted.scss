@@ -17,6 +17,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#screen-modifier-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100000000000000000000;
+  pointer-events: none;
+}
 
 #content > featuremenu > div.well {
     padding-left: 5px;
