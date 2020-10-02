@@ -31,7 +31,6 @@
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap-theme.min.css';
-//import './themes/nightshift/bootstrap.css';
 
 import 'bootstrap-additions/dist/bootstrap-additions.css';
 import 'ui-select/dist/select.css';
@@ -48,12 +47,16 @@ import './main.scss';
 import './customization.scss';
 
 // 3rd party modules
-require('jquery');
+import $ from "jquery";
+
+window.$ = $;
+window.jQuery = $;
+
+import angular from 'angular';
 require('jqueryui');
 //import bootstrap from 'bootstrap';
 import * as moment from 'moment';
 require('moment-timezone');
-import angular from 'angular';
 import sanitize from 'angular-sanitize';
 import 'angular-filter';
 import 'angular-gettext';
@@ -63,7 +66,6 @@ import 'angular-ui-utils/modules/utils';
 import animate from 'angular-animate';
 import cookies from 'angular-cookies';
 import 'ui-select/dist/select';
-import 'angular-dragdrop/src/angular-dragdrop';
 import 'ng-draggable';
 import '@kariudo/angular-fullscreen';
 import touch from 'angular-touch';
@@ -73,6 +75,7 @@ import ui from 'angular-ui-bootstrap';
 import tree from 'angular-ui-tree';
 import localstorage from 'angular-local-storage';
 import 'angular-hotkeys/build/hotkeys';
+import * as d3 from 'd3';
 
 require('angular-strap/dist/angular-strap.min');
 require('angular-strap/dist/angular-strap.tpl.min');
@@ -83,7 +86,9 @@ import hlsj from 'highlight.js/lib/index';
 require('tv4/tv4');
 require('objectpath/lib/ObjectPath');
 require('ng-embed/dist/ng-embed.min');
-require('spectrum-colorpicker');
+
+const spectrum = require('spectrum-colorpicker');
+import 'angular-spectrum-colorpicker';
 require('angular-spectrum-colorpicker/dist/angular-spectrum-colorpicker');
 import 'spectrum-colorpicker/spectrum.css';
 
@@ -119,10 +124,10 @@ import overview from './instance/overview/overview.module';
 
 let modules = ['mgcrea.ngStrap', 'gridster', 'ngDraggable', 'FBAngular', 'ui.bootstrap-slider', 'angularSpectrumColorpicker',
     'angularSpinner', 'angular-uuid', 'luegg.directives', 'angularMoment', 'ngTable', 'ngEmbed', 'gettext', 'matchMedia',
-    'schemaForm-datepicker', 'schemaForm-timepicker', 'schemaForm-datetimepicker', 'ngDragDrop', 'mgcrea.pullToRefresh',
+    'schemaForm-datepicker', 'schemaForm-timepicker', 'schemaForm-datetimepicker', 'mgcrea.pullToRefresh',
     'ng-countryflags', 'cfp.hotkeys', 'angular.filter', 'ui.indeterminate', 'ui.knob',
     animate, app, common, objects, cookies, sanitize, touch, ui, featuremenu, about, systemlog,
-    doc, clipboard.name, tree, localstorage, ngQrcode
+    doc, store, overview, clipboard.name, tree, localstorage, ngQrcode
 ];
 
 /* COMPONENT SECTION */
