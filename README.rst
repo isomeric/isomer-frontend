@@ -82,7 +82,8 @@ You can reinstall the frontend after changing what modules you're using.
 Assets
 ------
 
--  Fabulous icons by iconmonstr.com and Hackerfleet contributors
-
+- Fabulous icons by iconmonstr.com and Hackerfleet contributors
+- Isomer Store icon: "Cube" via nounproject by hunotika, CC-BY-3.0 -
+  https://thenounproject.com/hunotika
 
 -- :boat: :+1:
