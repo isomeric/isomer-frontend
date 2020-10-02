@@ -16,8 +16,12 @@
   ~ You should have received a copy of the GNU Affero General Public License
   ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
-
-
+<link rel="stylesheet" ng-ref="$ctrl.stylesheets[$ctrl.user.profile.theme]">
+<!-- <link rel="stylesheet" href="/assets/nightshift.css"> -->
+<div id="screen-modifier-overlay"
+     ng-style="{'background': $ctrl.user.profile.settings.screen_filter.color,
+                'mix-blend-mode': $ctrl.user.profile.settings.screen_filter.mode,
+                'opacity': $ctrl.user.profile.settings.screen_filter.opacity}"></div>
 <div>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation"
          id="mainmenu" ng-show="$ctrl.user.mainmenu_visible">

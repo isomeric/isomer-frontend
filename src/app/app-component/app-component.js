@@ -54,6 +54,23 @@ class AppComponent {
         console.log('[APP] Backgrounds:', backgrounds);
         console.log('[APP] Themes:', themes);
 
+        this.stylesheets = {
+            default: '',
+            dark: "src/components/nightshift/assets/themes/nightshift/bootstrap.css",
+        }
+
+        hotkeys.add({
+            combo: 'ctrl+alt+n',
+            description: 'Toggle dark theme',
+            callback: function() {
+                if (self.user.theme === "default") {
+                    self.user.theme = "dark";
+                } else {
+                    self.user.theme = "default";
+                }
+            }
+        })
+
         hotkeys.add({
             combo: '~',
             description: 'Toggle statusbar details',
