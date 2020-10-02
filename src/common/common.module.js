@@ -1,7 +1,7 @@
 /*
  * Isomer - The distributed application framework
  * ==============================================
- * Copyright (C) 2011-2019 Heiko 'riot' Weinen <riot@c-base.org> and others.
+ * Copyright (C) 2011-2020 Heiko 'riot' Weinen <riot@c-base.org> and others.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -19,6 +19,7 @@
 
 import angular from 'angular';
 
+import CheckMarkComponent from './component/checkmark-component';
 import UserInfoComponent from './component/user-info-component';
 import FileUploadComponent from './component/file-upload-component';
 
@@ -60,6 +61,7 @@ export default angular
     .filter('objectLength', ObjectLength)
     .component('logindialog', {controller: LoginController, template: LoginTemplate})
     .component('userInfoComponent', UserInfoComponent)
+    .component('checkMark', CheckMarkComponent)
     .component('fileUploadComponent', FileUploadComponent)
     .component('commentTree', {
         controller: CommentTreeController,
