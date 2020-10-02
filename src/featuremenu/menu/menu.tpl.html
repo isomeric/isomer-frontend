@@ -24,7 +24,8 @@
         <table>
             <tr>
                 <span class="center-block">
-                    <ng-include class="node-logo" src="$ctrl.user.logo_url"></ng-include>
+                    <ng-include class="node-logo"
+                                src="$ctrl.user.logo_url"></ng-include>
                 </span>
             </tr>
             <tr id="login-notice">
@@ -81,9 +82,14 @@
                 class="menu-box animate-show">
                 <span class="menu-mover fa fa-arrows" ng-show="$ctrl.lockState"></span>
                 <a href="#!{{item.url}}" class="center-block menu-block">
-                    <img src="{{item.svg}}" type="image/svg+xml" class="module-icon-big"/>
+                    <div class="menu-block-administrative"
+                         ng-if="item.roles.indexOf('admin') >= 0"></div>
 
-                    <div class="menu-label center-block" ng-style="{'font-size': 10 + 2 * item.size +'px'}">
+                    <img src="{{item.svg}}" type="image/svg+xml"
+                         class="module-icon-big"/>
+
+                    <div class="menu-label center-block"
+                         ng-style="{'font-size': 10 + 2 * item.size +'px'}">
                         {{item.title}}
                     </div>
                 </a>

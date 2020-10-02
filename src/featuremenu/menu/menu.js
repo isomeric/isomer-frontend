@@ -106,9 +106,9 @@ class featureMenu {
 
             let menu_dict = {};
 
-            let menu = $('#modulemenu');
+            //let menu = $('#modulemenu');
 
-            menu.empty();
+            //menu.empty();
 
 
             // TODO: Move these two into the user service. Actually, stuff should be available per default.
@@ -148,6 +148,7 @@ class featureMenu {
                 if ('icon' in state && true) { // (state.label === 'Map' || state.label in enabled)) {
                     let item = {
                         title: state.label,
+                        roles: state.roles,
                         url: state.url,
                         svg: state.icon,
                         row: 0,
@@ -183,8 +184,8 @@ class featureMenu {
                         }
                     }
 
-                    let menuentry = '<li><a href="#!' + item.url + '"><img class="module-icon-tiny" src="' + item.svg + '" type="image/svg+xml">' + item.title + '</a></li>';
-                    menu_dict[state.label] = menuentry;
+                    // let menuentry = '<li><a href="#!' + item.url + '"><img class="module-icon-tiny" src="' + item.svg + '" type="image/svg+xml">' + item.title + '</a></li>';
+                    // menu_dict[state.label] = menuentry;
 
                     self.items.push(item);
                 } else {
@@ -196,13 +197,14 @@ class featureMenu {
                 self.storeMenuConfig();
             }
 
-            let labels = Object.keys(menu_dict);
+            /* let labels = Object.keys(menu_dict);
             labels.sort();
 
             for (let label of labels) {
                 //console.log('Label:', label);
                 menu.append(menu_dict[label]);
             }
+            */
 
             if (self.items.length === 0) {
                 // TODO: Add link to docs, that explains how to do that.
