@@ -1,7 +1,7 @@
 /*!
  * Isomer - The distributed application framework
  * ==============================================
- * Copyright (C) 2011-2019 Heiko 'riot' Weinen <riot@c-base.org> and others.
+ * Copyright (C) 2011-2020 Heiko 'riot' Weinen <riot@c-base.org> and others.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -96,11 +96,21 @@ a.node-button {
     padding: 5px;
     height: 100%;
     border-radius: 5px;
+    position: relative;
 }
 
 .menu-block:hover {
     //background: $color-primary-2;
     color: $color-black;
+}
+
+.menu-block-administrative {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-width: 0 16px 16px 0;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0) red;
 }
 
 .gridster .gridster-item:hover .menu-mover {

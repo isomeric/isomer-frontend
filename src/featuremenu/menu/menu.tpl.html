@@ -24,19 +24,16 @@
         <table>
             <tr>
                 <span class="center-block">
-                    <ng-include class="node-logo" src="$ctrl.user.logo_url"></ng-include>
+                    <ng-include class="node-logo"
+                                src="$ctrl.user.logo_url"></ng-include>
                 </span>
             </tr>
             <tr id="login-notice">
                 <div ng-hide="$ctrl.user.signedin">
-                    <logindialog></logindialog>
-                    <span class="text-dark" ng-show="!$ctrl.socket.connected">
-                            <h2 class="text-center" translate>No connection</h2>
-                            <div class="text-center" translate>Your client is not connected to the node.</div>
-                        </span>
-                    <div ng-show="$ctrl.user.signedin">
-                        <h2 ng-if="$ctrl.user.signedin" translate>Logging in...</h2>
+                    <div>
+                        <logindialog></logindialog>
                     </div>
+
                 </div>
             </tr>
         </table>
@@ -81,9 +78,14 @@
                 class="menu-box animate-show">
                 <span class="menu-mover fa fa-arrows" ng-show="$ctrl.lockState"></span>
                 <a href="#!{{item.url}}" class="center-block menu-block">
-                    <img src="{{item.svg}}" type="image/svg+xml" class="module-icon-big"/>
+                    <div class="menu-block-administrative"
+                         ng-if="item.roles.indexOf('admin') >= 0"></div>
 
-                    <div class="menu-label center-block" ng-style="{'font-size': 10 + 2 * item.size +'px'}">
+                    <img src="{{item.svg}}" type="image/svg+xml"
+                         class="module-icon-big"/>
+
+                    <div class="menu-label center-block"
+                         ng-style="{'font-size': 10 + 2 * item.size +'px'}">
                         {{item.title}}
                     </div>
                 </a>

@@ -206,6 +206,8 @@
 
             <div class="tab-pane" id="tests">
                 <div class="well">
+                    <h3>Theme</h3>
+                    <span>{{$ctrl.user.theme}}</span>
                     <h3>Angular things</h3>
                     <h4>Filters</h4>
                     capitalize: <span ng-bind="$ctrl.user.username | capitalize"></span>
@@ -278,6 +280,9 @@
                     <button ng-click="$ctrl.testProfileUpdate()" class="btn btn-success">
                         Profile.Update
                     </button>
+
+                    <h4>Components</h4>
+                    <comment-tree comment-object="FOO-BAR-UUIDSOMETHING-UUID"></comment-tree>
                 </div>
             </div>
         </div>

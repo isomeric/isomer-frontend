@@ -5,10 +5,10 @@ let chalk = require('chalk');
 let webpack = require('webpack');
 
 let HtmlWebpackPlugin = require('html-webpack-plugin');
-let CleanWebpackPlugin = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 let BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 let AngularGetTextPlugin = require('angular-gettext-plugin');
-let Uglify = require("uglifyjs-webpack-plugin");
+//let Uglify = require("uglifyjs-webpack-plugin");
 let CompressionPlugin = require("compression-webpack-plugin");
 
 let commitHash = require('child_process')
@@ -22,7 +22,7 @@ let PARAMS_DEFAULT = {
             'angular': __dirname + '/node_modules/angular',
             //'angular-schema-form':           '../node_modules/angular-schema-form',
             'angular-schema-form': __dirname + '/node_modules/angular-schema-form/dist/schema-form.js',
-            //'spectrum': '../node_modules/spectrum-colorpicker'
+            'spectrum': '../node_modules/spectrum-colorpicker',
             //'angular-schema-form-bootstrap': '../node_modules/angular-schema-form-bootstrap/bootstrap-decorator.js'
             'phaser': __dirname + '/node_modules/phaser-ce/build/custom/phaser-split.js',
             'pixi': __dirname + '/node_modules/phaser-ce/build/custom/pixi.js',
@@ -32,13 +32,15 @@ let PARAMS_DEFAULT = {
             'ElementQueries': 'css-element-queries/src/ElementQueries',
             'jsPlumb': 'jsplumb/dist/js/jsplumb',
             'ui.tree': 'angular-ui-tree/dist/angular-ui-tree',
-            'angular-gantt': 'angular-gantt'
-        }
+            'angular-gantt': 'angular-gantt',
+            'fullcalendar': __dirname + '/node_modules/fullcalendar/dist/fullcalendar.js'
+        },
+        modules: ['node_modules'],
     },
     target: 'web',
     entry: {
-        main: './src/main.js',
-        vendor: [
+        main: ['./src/main.js']
+        /*vendor: [
             'lodash',
             'jquery',
             'bootstrap',
@@ -49,6 +51,7 @@ let PARAMS_DEFAULT = {
             'angular-animate',
             'angular-sanitize',
             'angular-moment',
+            'fullcalendar',
 
             'objectpath',
 
@@ -58,12 +61,33 @@ let PARAMS_DEFAULT = {
             'angular-strap/dist/angular-strap.tpl.js',
 
             'humanize-duration'
-        ]
+        ]*/
     },
     output: {
         filename: '[name].[chunkhash].js',
         sourceMapFilename: '[name].[chunkhash].map',
         jsonpFunction: 'webpackJsonp'
+    },
+    optimization: {
+        runtimeChunk: 'single',
+        splitChunks: {
+            chunks: 'all',
+            maxInitialRequests: Infinity,
+            minSize: 0,
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name(module) {
+                        // get the name. E.g. node_modules/packageName/not/this/part.js
+                        // or node_modules/packageName
+                        const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+
+                        // npm package names are URL-safe, but some servers don't like @ symbols
+                        return `npm.${packageName.replace('@', '')}`;
+                    },
+                },
+            },
+        },
     },
     plugins: [
         new AngularGetTextPlugin({
@@ -84,36 +108,36 @@ let PARAMS_DEFAULT = {
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
+            'window.jQuery': 'jquery',
+            'window.$': 'jquery',
+            jquery: 'jquery',
             jQuery: 'jquery',
-            c3: 'c3',
-            qrcode: 'qrcode-generator'
+            qrcode: 'qrcode-generator',
+            d3: 'd3',
+            '_': 'lodash'
         }),
         new webpack.DefinePlugin({
             __COMMIT_HASH__: JSON.stringify(commitHash)
-        })
-        // TODO: Make this an argument or so:
-        //new BundleAnalyzerPlugin(),
+        }),
+        typeof process.env.WEBPACK_ANALYZE !== 'undefined' ? new BundleAnalyzerPlugin({openAnalyzer: false}) : function () {
+        },
     ],
     devServer: {
         port: 8081,
         host: '0.0.0.0',
         compress: true,
-        hot: true
+        hot: process.env.WEBPACK_HOT || true
     }
 };
 let PARAMS_PER_TARGET = {
     DEV: {
-        devtool: 'cheap-source-map',
+        devtool: 'eval-source-map',
         output: {
             filename: '[name].js'
         },
         plugins: [
             new webpack.HotModuleReplacementPlugin(),
             new webpack.SourceMapDevToolPlugin({filename: '[file].map'}),
-            new webpack.optimize.CommonsChunkPlugin({
-                name: 'vendor',
-                filename: 'vendor.js'
-            }),
             new webpack.LoaderOptionsPlugin({
                 debug: true
             })
@@ -125,11 +149,7 @@ let PARAMS_PER_TARGET = {
         },
         devtool: 'cheap-source-map',
         plugins: [
-            new CleanWebpackPlugin(['build']),
-            new webpack.optimize.CommonsChunkPlugin({
-                name: 'vendor',
-                filename: 'vendor.[chunkhash].js'
-            }),
+            new CleanWebpackPlugin(),
             new webpack.LoaderOptionsPlugin({
                 debug: true
             })
@@ -140,14 +160,10 @@ let PARAMS_PER_TARGET = {
             path: __dirname + '/dist'
         },
         plugins: [
-            new CleanWebpackPlugin(['dist']),
-            new webpack.optimize.CommonsChunkPlugin({
-                name: 'vendor',
-                filename: 'vendor.[chunkhash].js'
-            }),
+            new CleanWebpackPlugin(),
             //new Uglify()
             new CompressionPlugin({
-                asset: '[path].gz[query]',
+                filename: '[path].gz[query]',
                 algorithm: 'gzip',
                 test: /\.(js|css|ttf|svg|eot)$/,
                 threshold: 10240,
@@ -167,20 +183,28 @@ module.exports = {
     entry: params.entry,
     output: params.output,
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
+                use: [{
+                    loader: 'babel-loader',
+                    options: {presets: 'es2015'},
+                }],
                 exclude: /(\.test.js$|node_modules)/
             },
             {
                 test: require.resolve('jquery'),
-                loader: 'expose-loader?$!expose-loader?jQuery'
+                use: 'expose-loader?$!expose-loader?jQuery'
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                ]
             },
             //{test: require.resolve('moment'), loader: 'expose-loader?moment'},
-            {test: /\.css$/, loader: 'style-loader!css-loader'},
-            {test: /\.tpl.html/, loader: 'html-loader', exclude: /(index.html)/},
-            {test: /\.json/, loader: 'json-loader'},
+            {test: /\.tpl.html/, use: 'html-loader', exclude: /(index.html)/},
             //{test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff(2)?)(\?[a-z0-9]+)?$/, loader: 'file-loader'}, //  url?limit=50000'}
             {
                 test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff(2)).*$/,
@@ -197,27 +221,31 @@ module.exports = {
             },
             //{test: /[\/]angular\.js$/, loader: "exports-loader?angular"},
             {
-                test: /\.scss/, loaders: [
+                test: /\.s[ac]ss$/i,
+                use: [
                     'style-loader',
                     'css-loader',
                     {
                         loader: 'sass-loader',
                         options: {
-                            implementation: require('sass')
+                            implementation: require('sass'),
+                            sassOptions: {
+                                includePaths: ['scss'],
+                            }
                         }
                     }
                 ]
             },
             {
                 test: require.resolve('tinymce/tinymce'),
-                loaders: [
+                use: [
                     'exports-loader?window.tinymce',
                     'imports-loader?this=>window'
                 ]
             },
             {
                 test: /tinymce\/(themes|plugins)\//,
-                loaders: [
+                use: [
                     'exports-loader?window.tinymce',
                     'imports-loader?this=>window'
                 ]

@@ -22,6 +22,9 @@
     <div class="header-row row">
         <H1>System configuration</H1>
         <div class="editor-buttons-top" ng-show="$ctrl.model != null">
+            <input type="checkbox" ng-model="$ctrl.hideMissing"/>
+            <label>Hide missing</label>
+
             <input type="checkbox" ng-model="$ctrl.debug"/>
             <label>Debug</label>
             <button class="btn btn-default"
@@ -40,13 +43,17 @@
             <div ui-tree>
                 <ol ui-tree-nodes="" ng-model="$ctrl.components">
                     <li ng-repeat="item in $ctrl.components" ui-tree-node
+                        ng-if="item.present || !$ctrl.hideMissing"
                         ng-class="{'angular-ui-tree-node-active': $ctrl.model.uuid == item.uuid}">
-                        <div ng-click="$ctrl.showConfig(item.uuid)">
+                        <div ng-click="$ctrl.showConfig(item.uuid)"
+                             ng-class="{'component-disabled': item.present == false}">
                             {{item.name}}
                         </div>
                         <ol ui-tree-nodes="" ng-model="item.items">
-                            <li ng-repeat="subItem in item.items" ui-tree-node>
-                                <div ng-click="$ctrl.showConfig(subItem.uuid)">
+                            <li ng-repeat="subItem in item.items" ui-tree-node
+                                ng-if="subItem.present || !$ctrl.hideMissing">
+                                <div ng-click="$ctrl.showConfig(subItem.uuid)"
+                                     ng-class="{'component-disabled': subItem.present == false}">
                                     {{subItem.name}}
                                 </div>
                             </li>
@@ -65,7 +72,8 @@
             <span ng-show="$ctrl.stored" class="label label-success">Stored</span>
             <span ng-show="$ctrl.modified" class="label label-danger">Modified</span>
 
-            <form sf-schema="$ctrl.schema" sf-form="$ctrl.form" sf-model="$ctrl.model">
+            <form sf-schema="$ctrl.schema" sf-form="$ctrl.form" sf-model="$ctrl.model"
+                  sf-options="$ctrl.formOptions">
             </form>
             <div class="pull-right editor-buttons" ng-show="$ctrl.model != null">
                 <button class="btn btn-default"

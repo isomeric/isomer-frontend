@@ -18,7 +18,7 @@
   -->
 
 
-<div class="well">
+<div class="well" id="top">
     <H1>{{$ctrl.config.action}}: <a href="#!/list/{{$ctrl.schemadata.schema.name}}">{{$ctrl.schemascreenname}}</a>/<a
         href="#!/editor/{{$ctrl.schemadata.schema.name}}/{{$ctrl.model.uuid}}/edit">{{$ctrl.model.name}}</a>
         <spectrum-colorpicker
@@ -47,20 +47,27 @@
             <span translate>Readonly</span>
         </span>
 
+        <span id="show_raw">
+            <input type="checkbox" ng-model="$ctrl.show_raw"/>
+            <span translate>Show Raw Data</span>
+            <a ng-click="$ctrl.anchorscroll('raw_data')" ng-if="$ctrl.show_raw"><span class="fa fa-angle-double-down"></span></a>
+        </span>
 
-        <span id="debug">
-            <input type="checkbox" ng-model="$ctrl.debug"/>
-            <span translate>Debug</span>
+        <span id="defaultform">
+            <input type="checkbox" ng-model="$ctrl.defaultform"/>
+            <span translate>Use default form</span>
         </span>
     </div>
     <span id="objStored" class="label label-success hidden" translate>Stored</span>
     <span id="objModified" class="label label-danger hidden" translate>Modified</span>
 
-    <form sf-schema="$ctrl.schemadata.schema" sf-form="$ctrl.schemadata.form" sf-model="$ctrl.model"
+    <form sf-schema="$ctrl.schemadata.schema" sf-form="$ctrl.defaultform ? ['*'] : $ctrl.schemadata.form" sf-model="$ctrl.model"
           sf-options="$ctrl.form_options">
     </form>
 
-    <div ng-show="$ctrl.debug">
+    <div ng-show="$ctrl.show_raw" id="raw_data">
+        <h1>Raw data <a ng-click="$ctrl.anchorscroll('top')" class="pull-right"><span class="fa fa-angle-double-up"></a>
+        </h1>
         <hr>
             <span class="fa" ng-click="argsCollapsed = !argsCollapsed" ng-class="{'fa-chevron-right': argsCollapsed,
             'fa-chevron-down': !argsCollapsed}"></span>

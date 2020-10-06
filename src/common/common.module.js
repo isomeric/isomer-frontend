@@ -1,7 +1,7 @@
 /*
  * Isomer - The distributed application framework
  * ==============================================
- * Copyright (C) 2011-2019 Heiko 'riot' Weinen <riot@c-base.org> and others.
+ * Copyright (C) 2011-2020 Heiko 'riot' Weinen <riot@c-base.org> and others.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -19,6 +19,7 @@
 
 import angular from 'angular';
 
+import CheckMarkComponent from './component/checkmark-component';
 import UserInfoComponent from './component/user-info-component';
 import FileUploadComponent from './component/file-upload-component';
 
@@ -42,6 +43,9 @@ import focusMe from './utils/focusme';
 import LoginController from './component/login-component';
 import LoginTemplate from './component/login.tpl.html';
 
+import CommentTreeController from './component/comment-tree';
+import CommentTreeTemplate from './templates/comment-tree.tpl.html';
+
 import resizer from './component/resizer';
 import pagetitle from './component/pagetitle';
 
@@ -57,7 +61,22 @@ export default angular
     .filter('objectLength', ObjectLength)
     .component('logindialog', {controller: LoginController, template: LoginTemplate})
     .component('userInfoComponent', UserInfoComponent)
+    .component('checkMark', CheckMarkComponent)
     .component('fileUploadComponent', FileUploadComponent)
+    .component('commentTree', {
+        controller: CommentTreeController,
+        template: CommentTreeTemplate,
+        bindings: {commentObject: '@'},
+        link: function(scope, elem, attrs) {
+            attrs.$observe(function() {
+                console.log('OBSERVING');
+                return attrs.commentObject;
+            }, function(val) {
+                console.log('HELLO, I changed');
+                scope.$emit('UUIDChange');
+            });
+        }
+    })
     .service('notification', NotificationService)
     .service('infoscreen', InfoscreenService)
     .service('user', UserService)

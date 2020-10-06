@@ -1,7 +1,7 @@
 /*
  * Isomer - The distributed application framework
  * ==============================================
- * Copyright (C) 2011-2019 Heiko 'riot' Weinen <riot@c-base.org> and others.
+ * Copyright (C) 2011-2020 Heiko 'riot' Weinen <riot@c-base.org> and others.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -53,6 +53,23 @@ class AppComponent {
 
         console.log('[APP] Backgrounds:', backgrounds);
         console.log('[APP] Themes:', themes);
+
+        this.stylesheets = {
+            default: '',
+            dark: "src/components/nightshift/assets/themes/nightshift/bootstrap.css",
+        }
+
+        hotkeys.add({
+            combo: 'ctrl+alt+n',
+            description: 'Toggle dark theme',
+            callback: function() {
+                if (self.user.theme === "default") {
+                    self.user.theme = "dark";
+                } else {
+                    self.user.theme = "default";
+                }
+            }
+        })
 
         hotkeys.add({
             combo: '~',

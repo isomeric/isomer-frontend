@@ -1,0 +1,63 @@
+<div>Comments for object {{$ctrl.commentObject}}:</div>
+
+<div>
+
+    <script type="text/ng-template" id="comments_renderer.html">
+        <span ng-click="$ctrl.clickNode(item.uuid)"
+              class="fa fa-{{item.type}}"></span>
+        <div ui-tree-handle>
+            <div class="commentTreeVoteDial">
+                <a class="upVote" ng-click="$ctrl.upVote(item)"><i
+                    class="fa fa-arrow-up"></i></a>
+                <a class="downVote" ng-click="$ctrl.downVote(item)"><i
+                    class="fa fa-arrow-down"></i></a>
+            </div>
+
+            <span class="commentTreeAuthor">
+                <a ng-click="$ctrl.showAuthor(item.author)">
+                    {{$ctrl.authors[item.author]}}
+                </a>
+            </span>
+            <span class="commentTreeFlair">Flair</span>
+            <span class="commentTreeVotes">{{item.votes}} points</span>
+            ·
+            <span class="commentTime">{{item.date | date:'mediumDate'}}</span>
+            <br>
+            {{item.text}}
+            <br>
+            <button type="button" class="btn btn-primary" data-animation="am-flip-x"
+                    bs-dropdown aria-haspopup="true" aria-expanded="false">
+                ...
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a ng-click="$ctrl.award()">
+                    <span class="fa fa-smile-o"></span> Give Award
+                </a></li>
+                <li><a ng-click="$ctrl.share()">
+                    <span class="fa fa-share"></span> Share
+                </a></li>
+                <li><a ng-click="$ctrl.report()">
+                    <span class="fa fa-ge"> Report
+                </a></li>
+                <li><a ng-click="$ctrl.save()">
+                    <span class="fa fa-save"></span> Save
+                </a></li>
+            </ul>
+        </div>
+
+        <ol ui-tree-nodes="" ng-model="item.items">
+            <li ng-repeat="item in item.items" ui-tree-node
+                ng-include="'comments_renderer.html'">
+
+            </li>
+        </ol>
+    </script>
+
+    <div class="clt" ui-tree>
+        <ol ui-tree-nodes="" ng-model="$ctrl.comments" id="tree-root">
+            <li ng-repeat="item in $ctrl.comments" ui-tree-node
+                ng-include="'comments_renderer.html'">
+            </li>
+        </ol>
+    </div>
+</div>

@@ -1,0 +1,217 @@
+<!--
+  ~ Isomer - The distributed application framework
+  ~ ==============================================
+  ~ Copyright (C) 2011-2019 Heiko 'riot' Weinen <riot@c-base.org> and others.
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU Affero General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU Affero General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU Affero General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+
+<div class="well container-fluid">
+    <h1>Isomer Instance Management</h1>
+
+    <h2>Overview</h2>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="instanceName" class="col-sm-2 control-label">Instance Name</label>
+            <div class="col-sm-10">
+                <p class="form-control-static" id="instanceName">{{$ctrl.info.context.instance}}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="contact" class="col-sm-2 control-label">Contact</label>
+            <div class="col-sm-10">
+                <p class="form-control-static" id="contact">{{$ctrl.config.contact}}</p>
+            </div>
+        </div>
+        <!--<div class="form-group">
+            <label for="quiet" class="col-sm-2 control-label">Quiet</label>
+            <div class="col-sm-10">
+                <check-mark id="quiet" checked="$ctrl.config.context.quiet"></check-mark>
+            </div>
+        </div>
+        -->
+    </form>
+
+    <h2>Manage</h2>
+
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="version" class="col-sm-2 control-label">Isomer version</label>
+            <div class="col-sm-10">
+                <p class="form-control-static" id="version">{{$ctrl.info.current_version}}</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="needsRestart" class="col-sm-2 control-label">New version</label>
+            <div class="col-sm-10">
+                <button id="needsRestart"
+                        class="btn btn-default btn-danger"
+                        ng-click="$ctrl.upgrade()"
+                        ng-show="$ctrl.upgradeable">
+                    <span class="fa fa-download"></span> Upgrade to {{$ctrl.info.latest_version}}
+                </button>
+                <p class="form-control-static"
+                   ng-hide="$ctrl.upgradeable">
+                    No known updates
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="needsRestart" class="col-sm-2 control-label">Restart required</label>
+            <div class="col-sm-10">
+                <button id="needsRestart"
+                        class="btn btn-default btn-danger"
+                        ng-click="$ctrl.restart()"
+                        ng-show="$ctrl.info.needs_restart">
+                    <span class="fa fa-recycle"></span> Restart
+                </button>
+                <p class="form-control-static" ng-hide="$ctrl.info.needs_restart">No</p>
+                <ul>
+                    <li ng-repeat="item in $ctrl.info.restart_reasons">
+                        {{item}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+
+
+        <div class="panel-group" ng-model="panels.activePanel" role="tablist"
+         aria-multiselectable="true" bs-collapse>
+        <div class="panel panel-default">
+            <div class="panel-heading panel-hover" role="tab">
+                <h4 class="panel-title">
+                    <a bs-collapse-toggle>
+                        Environments
+                    </a>
+                </h4>
+            </div>
+            <div class="panel-collapse" role="tabpanel" bs-collapse-target
+                 uib-collapse="false">
+                <div class="panel-body">
+                    <h4>Manage environments</h4>
+
+
+                    <table class="table table-hover table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Active</th>
+                                <th>Database</th>
+                                <th>Frontend</th>
+                                <th>Installed</th>
+                                <th>Migrated</th>
+                                <th>Provisioned</th>
+                                <th>Tested</th>
+                                <th>Approved</th>
+                                <th>Upgraded from</th>
+                                <th>Version</th>
+                                <th>Modules</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Green</td>
+                                <td><check-mark checked="$ctrl.info.context.environment == 'green'"></check-mark></td>
+                                <td><label>{{$ctrl.config.environments.green.database}}</label></td>
+                                <td><check-mark checked="$ctrl.config.environments.green.frontend"></check-mark></td>
+                                <td><check-mark checked="$ctrl.config.environments.green.installed"></check-mark></td>
+                                <td><check-mark checked="$ctrl.config.environments.green.migrated"></check-mark></td>
+                                <td><check-mark checked="$ctrl.config.environments.green.provisioned"></check-mark></td>
+                                <td><check-mark checked="$ctrl.config.environments.green.tested"></check-mark></td>
+                                <td><check-mark checked="$ctrl.config.environments.green.approved"></check-mark></td>
+                                <td><label>{{$ctrl.config.environments.green.upgraded_from}}</label></td>
+                                <td><label>{{$ctrl.config.environments.green.version}}</label></td>
+                                <td>
+                                    <ul>
+                                        <li ng-repeat="(key, val) in $ctrl.config.environments.green.modules">
+                                            {{key}}
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Blue</td>
+                                <td><check-mark checked="$ctrl.info.context.environment == 'blue'"></check-mark></td>
+                                <td><label>{{$ctrl.config.environments.blue.database}}</label></td>
+                                <td><check-mark checked="$ctrl.config.environments.blue.frontend"></check-mark></td>
+                                <td><check-mark checked="$ctrl.config.environments.blue.installed"></check-mark></td>
+                                <td><check-mark checked="$ctrl.config.environments.blue.migrated"></check-mark></td>
+                                <td><check-mark checked="$ctrl.config.environments.blue.provisioned"></check-mark></td>
+                                <td><check-mark checked="$ctrl.config.environments.blue.tested"></check-mark></td>
+                                <td><check-mark checked="$ctrl.config.environments.blue.approved"></check-mark></td>
+                                <td><label>{{$ctrl.config.environments.blue.upgraded_from}}</label></td>
+                                <td><label>{{$ctrl.config.environments.blue.version}}</label></td>
+                                <td>
+                                    <ul>
+                                        <li ng-repeat="(key, val) in $ctrl.config.environments.blue.modules">
+                                            {{key}}
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- acting_environment
+    config
+    dbhost
+    dbname
+    environment
+    instance
+    instance_configuration
+
+    contact
+    environment
+    loglevel
+    quiet
+    database_host
+    database_port
+    database_type
+    user
+    group
+    web_address
+    web_hostnames
+    web_port
+    web_certificate
+    source
+    url
+    modules
+    webserver
+    service_template
+    environments
+    -->
+
+    
+    <div class="well" ng-if="$ctrl.user.debug">
+        <span class="fa" ng-click="debugInfoCollapsed = !debugInfoCollapsed"
+               ng-class="{'fa-chevron-right': debugInfoCollapsed,
+                          'fa-chevron-down': !debugInfoCollapsed}"></span>
+        Overview info:
+        <pre uib-collapse="debugInfoCollapsed" ng-bind="$ctrl.info | json"></pre>
+        
+        <span class="fa" ng-click="debugConfigCollapsed = !debugConfigCollapsed"
+              ng-class="{'fa-chevron-right': debugConfigCollapsed,
+                          'fa-chevron-down': !debugConfigCollapsed}"></span>
+        Overview config:
+        <pre uib-collapse="debugConfigCollapsed" ng-bind="$ctrl.config | json"></pre>
+
+    </div>
+</div>

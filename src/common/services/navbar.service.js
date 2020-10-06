@@ -1,7 +1,7 @@
 /*
  * Isomer - The distributed application framework
  * ==============================================
- * Copyright (C) 2011-2019 Heiko 'riot' Weinen <riot@c-base.org> and others.
+ * Copyright (C) 2011-2020 Heiko 'riot' Weinen <riot@c-base.org> and others.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -41,12 +41,12 @@ class NavbarService {
 
         this.add_now = function(thing_name) {
             console.log('[NAV] Adding thing:', thing_name, self.scope);
-            let thing = angular.element(document.createElement(thing_name));
+            let thing = $(document.createElement(thing_name));
             //let el = this.compile(thing, this);
             console.log('[NAV] Thing:', thing);
             let element = self.compile(thing)(self.scope);
             console.log('[NAV] El:', element);
-            angular.element('#custom_buttons').append(element);
+            $('#custom_buttons').append(element);
         };
 
         this.set_scope = function(scope) {
